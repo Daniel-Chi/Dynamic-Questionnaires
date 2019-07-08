@@ -1,20 +1,23 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import "./App.css";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Main from './pages/Main';
+import Flowchart from './pages/FlowChart';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Router>
       <div>
-        <Nav />
         <Switch>
-          <Route exact path="/" component={Books} />
-          <Redirect from="/Books" to="/" />
-          <Route path="/Books/:id" component={Detail} />
-          <Route component={NoMatch} />
+          <Route exact path="/" component={Login} />
+          <Redirect exact from="/login" to="/" />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/index" component={Main} />
+          <Route exact path="/flowchart/:id" component={Flowchart} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </Router>

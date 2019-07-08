@@ -1,0 +1,33 @@
+form {
+  margin-left: 200px;
+}
+
+form .form-group input {
+  width: 30%;
+}
+
+.footer {
+  margin-bottom: 0px;
+  margin-top: 25px;
+}
+
+.footer .container #footer-text {
+  position: absolute;
+  top: 620px;
+  right: 10px;
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header .container .button-pos {
+  padding-top: 10px;
+}
+
+.header .container .display-4 {
+  color: white;
+}
+
+.jumbotron {
+  background-color: dodgerblue;
+}
+/*# sourceMappingURL=App.css.map */
