@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from '../components/header';
-import SignInForm from '../components/signinform';
-import Footer from '../components/footer';
+import Header from '../components/Header';
+import LoginForm from '../components/LoginForm';
+import Footer from '../components/Footer';
 
 function Login() {
   return (
     <div>
       <Header />
-      <SignInForm />
+      <LoginForm />
       <Footer />
     </div>
   );
