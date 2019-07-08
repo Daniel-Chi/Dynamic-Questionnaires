@@ -1,3 +1,6 @@
+$maincolor: #1e90ff;
+$textcolor: white;
+
 form {
     margin-left: 200px;
     .form-group {
@@ -27,11 +30,28 @@ form {
             padding-top: 10px;
         }
         .display-4 {
-            color: white;
+            color: $textcolor;
         }
     }
 }
   
 .jumbotron {
-    background-color: dodgerblue;
+    background-color: $maincolor;
+}
+
+.nav {
+    background-color: $maincolor;
+    .nav-item {
+        .nav-link {
+            color: $textcolor;
+            margin-top: 10px;
+        }
+    }
+    p {
+        margin-left: 790px;
+        margin-top: 10px;
+        color: $textcolor;
+        font-size: 24px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 }

@@ -28,6 +28,23 @@ form .form-group input {
 }
 
 .jumbotron {
-  background-color: dodgerblue;
+  background-color: #1e90ff;
+}
+
+.nav {
+  background-color: #1e90ff;
+}
+
+.nav .nav-item .nav-link {
+  color: white;
+  margin-top: 10px;
+}
+
+.nav p {
+  margin-left: 790px;
+  margin-top: 10px;
+  color: white;
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 /*# sourceMappingURL=App.css.map */
