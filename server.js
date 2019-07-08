@@ -1,12 +1,23 @@
-import express from "express";
-import passport from "passport";
-import session from "express-session";
-import flash from "express-flash";
-import mongoose from "mongoose";
-import routes from "./routes";
-import User from "./models/Users";
+const express = require("express");
+// const passport = require("passport");
+// const session = require("express-session");
+// const flash = require("express-flash"); 
+// const mongoose = require("mongoose");
+// const routes = require("./routes");
+// const User = require("./models/Users");
+   const app = express();
 
-let app = express();
+
+
+// import express from "express";
+// import passport from "passport";
+// import session from "express-session";
+// import flash from "express-flash";
+// import mongoose from "mongoose";
+// import routes from "./routes";
+// import User from "./models/Users";
+
+//let app = express();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
