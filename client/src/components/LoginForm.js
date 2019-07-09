@@ -5,11 +5,12 @@ class LoginForm extends React.Component {
     state = {
         username: "",
         password: "",
-        err: ""
+        err: "",
+        user: {}
     };
 
     handleInputChange = event => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         this.setState({
             [name]: value
         });
@@ -17,18 +18,22 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/login', {
+        fetch('/signup', {
             method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password
             })
-        }).then(res =>{
-            this.setState({
-                username: "",
-                password: ""
+        }).then(res => res.json())
+            .then(resJSON => {
+                this.setState({
+                    user: resJSON.user
+                });
             });
-        });
     }
 
     render() {

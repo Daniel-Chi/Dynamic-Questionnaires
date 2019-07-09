@@ -1,9 +1,9 @@
 //package for generating hashed passwords
-import bCrypt from "bcrypt"
+const bCrypt = require("bcrypt");
 //using 'local' strategy with username and password, import as constructor
-import { Strategy as LocalStrategy } from "passport-local"
+const LocalStrategy = require("passport-local").Strategy;
 
-const initializePassport = (passport, User) => {
+module.exports = (passport, User) => {
     //Passport 'local' strategy configuration for signup
     passport.use("local-signup", new LocalStrategy({
         usernameField: "username",
@@ -106,5 +106,3 @@ const initializePassport = (passport, User) => {
         });
     });
 };
-
-export default initializePassport;

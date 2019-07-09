@@ -5,22 +5,22 @@ const MainHeader = () => {
         <div>
             <ul className="nav nav-pills">
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href="/" className="nav-link">
                         Menu Opt. 1
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href="/" className="nav-link">
                         Menu Opt. 2
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href="/" className="nav-link">
                         Menu Opt. 3
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href="/" className="nav-link">
                         Menu Opt. 4
                     </a>
                 </li>

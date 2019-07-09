@@ -1,11 +1,14 @@
-import express from "express";
-import passport from "passport";
-import session from "express-session";
-import flash from "express-flash";
-import mongoose from "mongoose";
-import routes from "./routes";
-import User from "./models/Users";
+const express = require("express");
+const passport = require("passport");
+const session = require("express-session");
+const flash = require("express-flash");
+const mongoose = require("mongoose");
+const routes = require("./routes");
+const authRouter = require("./routes/authRoutes");
+const initializePassport = require("./config/passport/passport");
+const db = require("./models");
 
+//initialize app and use PORT 3001 for Dev backend server
 let app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -24,15 +27,14 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 //Add auth route, passing in app and passport
-require("./routes/authRoutes")(app, passport);
-
+authRouter(app, passport);
 //import passport local strategies for login and signup and connect to Users in MongoDB
-require("./config/passport/passport")(passport, User)
+initializePassport(passport, db.User)
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
