@@ -6,6 +6,11 @@ form .form-group input {
   width: 30%;
 }
 
+form .form-group .btn {
+  margin-top: -65px;
+  margin-left: 355px;
+}
+
 .container .row .col-sm {
   border: lightgray;
   border-width: 2px;
@@ -40,7 +45,7 @@ form .form-group input {
 }
 
 .main {
-  margin-top: 130px;
+  margin-top: 350px;
 }
 
 .nav {
@@ -58,5 +63,13 @@ form .form-group input {
   color: white;
   font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.new {
+  margin-left: 200px;
+}
+
+.new form .form-group .form-control {
+  width: 40%;
 }
 /*# sourceMappingURL=App.css.map */

@@ -8,22 +8,18 @@ class MainBody extends React.Component {
                 <h2>
                     Welcome 
                 </h2>
-                <br />
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm">
-                            View All Questionnaires
-                            <img src={require("./images/eye.jpg")} />
+                <div className="new">
+                    <form>
+                        <div className="form-group">
+                            <label for="newQuestionnaire">
+                                Add New Questionnaire
+                            </label>
+                            <input className="form-control" id="newQuestionnaire" placeholder="Enter the name of your questionnaire here" />
+                            <button type="submit" className="btn btn-primary">
+                                <img src={require('./images/plus-sign.png')} />
+                            </button>
                         </div>
-                        <div className="col-sm">
-                            Add a New Questionnaire
-                            <img src={require("./images/plus-sign.png")} />
-                        </div>
-                        <div className="col-sm">
-                            Edit a Questionnaire
-                            <img src={require("./images/tools.png")} />
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         );

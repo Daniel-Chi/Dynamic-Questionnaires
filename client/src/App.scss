@@ -7,6 +7,10 @@ form {
         input {
             width: 30%;
         }
+        .btn {
+            margin-top: -65px;
+            margin-left: 355px;
+        }
     }
 }
 
@@ -52,7 +56,7 @@ form {
 }
 
 .main {
-    margin-top: 130px;
+    margin-top: 350px;
 }
 
 .nav {
@@ -69,5 +73,16 @@ form {
         color: $textcolor;
         font-size: 24px;
         font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+.new {
+    margin-left: 200px;
+    form {
+        .form-group {
+            .form-control {
+                width: 40%;
+            }
+        }
     }
 }
