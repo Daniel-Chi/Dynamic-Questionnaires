@@ -6,6 +6,14 @@ form .form-group input {
   width: 30%;
 }
 
+.container .row .col-sm {
+  border: lightgray;
+  border-width: 2px;
+  border-style: solid;
+  text-align: center;
+  font-size: 18px;
+}
+
 .footer {
   margin-bottom: 0px;
   margin-top: 25px;
@@ -29,6 +37,10 @@ form .form-group input {
 
 .jumbotron {
   background-color: #1e90ff;
+}
+
+.main {
+  margin-top: 370px;
 }
 
 .nav {

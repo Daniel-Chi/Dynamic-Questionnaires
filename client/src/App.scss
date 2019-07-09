@@ -9,6 +9,18 @@ form {
         }
     }
 }
+
+.container {
+    .row {
+        .col-sm {
+            border: lightgray;
+            border-width: 2px;
+            border-style: solid;
+            text-align: center;
+            font-size: 18px;
+        }
+    }
+}
   
 .footer {
     margin-bottom: 0px;
@@ -37,6 +49,10 @@ form {
   
 .jumbotron {
     background-color: $maincolor;
+}
+
+.main {
+    margin-top: 370px;
 }
 
 .nav {
