@@ -7,7 +7,7 @@ function Login() {
   return (
     <div>
       <Header />
-      <LoginForm />
+      <LoginForm authenticateRoute="signup" />
       <Footer />
     </div>
   );

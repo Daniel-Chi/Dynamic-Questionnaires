@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const authRouter = require("./routes/authRoutes");
 const initializePassport = require("./config/passport/passport");
-const db = require("./models");
+const User = require("./models/Users");
 
 //initialize app and use PORT 3001 for Dev backend server
 let app = express();
@@ -16,7 +16,11 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //passport, session, and flash middleware for authentication, persistent login, and error-handling
-app.use(session({ secret: process.env.secret || "temporary secret" }));
+app.use(session({
+  secret: process.env.secret || "temporary secret",
+  saveUninitialized: false,
+  resave: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -29,10 +33,13 @@ app.use(routes);
 //Add auth route, passing in app and passport
 authRouter(app, passport);
 //import passport local strategies for login and signup and connect to Users in MongoDB
-initializePassport(passport, db.User)
+initializePassport(passport, User)
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist", {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 // Start the API server
 app.listen(PORT, function () {

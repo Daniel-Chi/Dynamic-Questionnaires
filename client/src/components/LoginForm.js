@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/signup', {
+        fetch(this.props.authenticateRoute, {
             method: 'POST',
             headers: {
                 Accept: "application/json",
@@ -28,12 +28,9 @@ class LoginForm extends React.Component {
                 username: this.state.username,
                 password: this.state.password
             })
-        }).then(res => res.json())
-            .then(resJSON => {
-                this.setState({
-                    user: resJSON.user
-                });
-            });
+        }).then(res => {
+            console.log(res.body)
+        })
     }
 
     render() {

@@ -34,7 +34,7 @@ module.exports = (passport, User) => {
             } else {
                 //if everything passes, generate hash and create user in database
                 const passwordHash = generateHash(password);
-                User.insertOne({
+                User.create({
                     username: username,
                     password: passwordHash
                 }).then(newUser => {
@@ -44,9 +44,9 @@ module.exports = (passport, User) => {
                     } else {
                         return done(null, newUser);
                     }
-                });
+                }).catch(err => console.log("User create error: " + err));
             }
-        });
+        }).catch(err => console.log("Error finding user (signup): " + err));
     }));
 
     //Passport 'local' strategy configuration for login
@@ -103,6 +103,6 @@ module.exports = (passport, User) => {
                 //send errors if any
                 done(user.errors, null);
             }
-        });
+        }).catch(err => console.log("Error finding user (deserialize)" + err));
     });
 };
