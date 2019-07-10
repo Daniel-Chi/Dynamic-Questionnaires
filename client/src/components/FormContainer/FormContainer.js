@@ -1,5 +1,4 @@
 import React from 'react'
-import "./formcontainer.css"
 import Question from "../Question/Question"
 
 const FormContainer = () => (
