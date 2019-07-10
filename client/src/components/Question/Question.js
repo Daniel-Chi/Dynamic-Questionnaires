@@ -15,10 +15,7 @@ class Question extends Component {
         // Updating the input's state
         this.setState({
             [name]: value
-        });
-
-        // onChange makes this.state.questionTitle on char behind
-        // console.log(`Question title: ${this.state.questionTitle}`);
+        }, () => {console.log(`Textbox: ${this.state.questionTitle}`); });
     };
 
     render() {
