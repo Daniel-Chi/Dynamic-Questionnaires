@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch('/login', {
+        fetch(this.props.authenticationRoute, {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username,
