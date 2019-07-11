@@ -98,7 +98,7 @@ module.exports = (passport, User) => {
     passport.deserializeUser((_id, done) => {
         User.findOne({ _id: _id }).then(user => {
             if (user) {
-                done(null, user);
+                done(null, user._id);
             } else {
                 //send errors if any
                 done(user.errors, null);
