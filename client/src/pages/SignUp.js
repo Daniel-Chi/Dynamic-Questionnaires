@@ -7,7 +7,7 @@ function Login() {
   return (
     <div>
       <Header />
-      <LoginForm authenticateRoute="signup" />
+      <LoginForm authenticationRoute="/signup" otherAuth="Login" />
       <Footer />
     </div>
   );

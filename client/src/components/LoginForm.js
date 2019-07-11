@@ -4,9 +4,7 @@ class LoginForm extends React.Component {
 
     state = {
         username: "",
-        password: "",
-        err: "",
-        user: {}
+        password: ""
     };
 
     handleInputChange = event => {
@@ -18,7 +16,7 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        fetch(this.props.authenticateRoute, {
+        fetch(this.props.authenticationRoute, {
             method: 'POST',
             headers: {
                 Accept: "application/json",
@@ -28,8 +26,6 @@ class LoginForm extends React.Component {
                 username: this.state.username,
                 password: this.state.password
             })
-        }).then(res => {
-            console.log(res.body)
         })
     }
 
@@ -66,6 +62,11 @@ class LoginForm extends React.Component {
                     <button type="submit" className="btn btn-primary">
                         Submit
                     </button>
+                    <div className="button-pos">
+                        <button type="button" className="btn btn-primary">
+                            {this.props.otherAuth}
+                        </button>
+                    </div>
                 </form>
             </div>
         );
