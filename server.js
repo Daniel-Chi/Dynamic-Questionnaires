@@ -1,12 +1,12 @@
 const express = require("express");
-// const passport = require("passport");
-// const session = require("express-session");
-// const flash = require("express-flash"); 
-// const mongoose = require("mongoose");
-// const routes = require("./routes");
-// const User = require("./models/Users");
-   const app = express();
-
+const passport = require("passport");
+const session = require("express-session");
+const flash = require("express-flash"); 
+const mongoose = require("mongoose");
+const routes = require("./routes");
+const User = require("./models/Users");
+const app = express();
+const questionController = require("./models/questionController");
 
 
 // import express from "express";
@@ -36,6 +36,12 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 //Add auth route, passing in app and passport
 require("./routes/authRoutes")(app, passport);
+
+//Added apiroutes for schema js's
+require("./routes/api/question.js")(app)
+// app.get("/questions", (req,res)=>{
+//   questionModel.find()
+//})
 
 //import passport local strategies for login and signup and connect to Users in MongoDB
 require("./config/passport/passport")(passport, User)
