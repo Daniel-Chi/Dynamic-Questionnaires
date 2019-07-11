@@ -1,0 +1,161 @@
+$maincolor: #1e90ff;
+$textcolor: white;
+$mainpositioning: relative;
+$mainfont: Arial, Helvetica, sans-serif;
+
+form {
+    margin-left: 200px;
+    .form-group {
+        input {
+            width: 30%;
+        }
+        .btn {
+            margin-top: -65px;
+            margin-left: 355px;
+        }
+    }
+}
+
+.answer-choices {
+    text-align: center;
+    position: $mainpositioning;
+    left: 30%;
+}
+
+.answer-type {
+    padding-right: 120px;
+    margin-top: 20px;
+}
+
+.container {
+    .row {
+        .col-sm {
+            border: lightgray;
+            border-width: 2px;
+            border-style: solid;
+            text-align: center;
+            font-size: 18px;
+        }
+    }
+}
+  
+.footer {
+    margin-bottom: 0px;
+    margin-top: 25px;
+    .container {
+        #footer-text {
+            position: absolute;
+            top: 620px;
+            right: 10px;
+            font-size: 10px;
+            font-family: $mainfont;
+        }
+    }
+}
+  
+.header {
+    .container {
+        .button-pos {
+            padding-top: 10px;
+        }
+        .display-4 {
+            color: $textcolor;
+        }
+    }
+}
+
+.img-wrapper {
+    float: left;
+}
+  
+.jumbotron {
+    background-color: $maincolor;
+}
+
+.main {
+    margin-top: 350px;
+}
+
+.nav {
+    background-color: $maincolor;
+    .nav-item {
+        .nav-link {
+            color: $textcolor;
+            margin-top: 10px;
+        }
+    }
+    p {
+        margin-left: 790px;
+        margin-top: 10px;
+        color: $textcolor;
+        font-size: 24px;
+        font-family: $mainfont;
+    }
+}
+
+.new {
+    margin-left: 200px;
+    form {
+        .form-group {
+            .form-control {
+                width: 40%;
+            }
+        }
+    }
+}
+
+.question-container {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 3%;
+}
+
+#add-img {
+    position: $mainpositioning;
+    left: 85%;
+    bottom: 150px;
+
+}
+
+#delete-img {
+    float: right;
+    position: $mainpositioning;
+    right: 10px;
+}
+
+#form-name {
+    position: $mainpositioning;
+    left: 10%;
+    width: 80%;
+    text-align: center;
+    font-size: 24px;
+}
+
+#pls-select-ans {
+    text-align: center;
+}
+
+#questionnaire-container {
+    border: 2px solid black;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+}
+
+#question-title {
+    width: 80%;
+    text-align: left;
+    margin-top: 20px;
+    position: $mainpositioning;
+    left: 11%;
+}
+
+#textbox-img {
+    padding-left: 10px;
+    position: $mainpositioning;
+    bottom: 8px;
+}

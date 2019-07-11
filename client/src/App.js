@@ -4,8 +4,8 @@ import "./App.css";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Main from './pages/Main';
-import Flowchart from './pages/FlowChart';
 import NotFound from './pages/NotFound';
+import Questionnaire from './pages/Questionnaire';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Redirect exact from="/login" to="/" />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/index" component={Main} />
-          <Route exact path="/flowchart/:id" component={Flowchart} />
+          <Route exact path="/questionnaire" component={Questionnaire}/>
           <Route component={NotFound} />
         </Switch>
       </div>
