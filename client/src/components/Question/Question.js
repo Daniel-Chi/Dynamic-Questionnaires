@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import "./question.css"
 
 class Question extends Component {
     // Setting the component's initial state
