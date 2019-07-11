@@ -5,9 +5,12 @@ const WelcomeHeader = () => {
         <div>
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h3 className="display-4">
+                    <h1 className="display-4">
+                        Welcome to Dynamic Questionnaire!
+                    </h1>
+                    <p className="lead">
                         Enter a username and password to sign up!
-                    </h3>
+                    </p>
                 </div>
             </div>
         </div>

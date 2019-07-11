@@ -5,25 +5,23 @@ const MainHeader = () => {
         <div>
             <ul className="nav nav-pills">
                 <li className="nav-item">
-                    <a href="/" className="nav-link">
-                        Menu Opt. 1
+                    <a href="#" className="nav-link">
+                        About
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="/" className="nav-link">
-                        Menu Opt. 2
+                    <a href="#" className="nav-link">
+                        Help
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="/" className="nav-link">
-                        Menu Opt. 3
+                    <a href="#" className="nav-link">
+                        Account
                     </a>
                 </li>
-                <li className="nav-item">
-                    <a href="/" className="nav-link">
-                        Menu Opt. 4
-                    </a>
-                </li>
+                <p>
+                Dynamic Questionnaire
+                </p>
             </ul>
         </div>
     );
