@@ -4,12 +4,11 @@ class LoginForm extends React.Component {
 
     state = {
         username: "",
-        password: "",
-        err: ""
+        password: ""
     };
 
     handleInputChange = event => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         this.setState({
             [name]: value
         });
@@ -19,16 +18,15 @@ class LoginForm extends React.Component {
         event.preventDefault();
         fetch(this.props.authenticationRoute, {
             method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password
             })
-        }).then(res =>{
-            this.setState({
-                username: "",
-                password: ""
-            });
-        });
+        })
     }
 
     render() {
@@ -64,6 +62,11 @@ class LoginForm extends React.Component {
                     <button type="submit" className="btn btn-primary">
                         Submit
                     </button>
+                    <div className="button-pos">
+                        <button type="button" className="btn btn-primary">
+                            {this.props.otherAuth}
+                        </button>
+                    </div>
                 </form>
             </div>
         );

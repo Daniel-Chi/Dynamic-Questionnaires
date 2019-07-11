@@ -17,4 +17,4 @@ const AnswerSchema = new Schema({
 
 const Answers = mongoose.model("Answers", AnswerSchema);
 
-export default Answers;
+module.exports = Answers;
