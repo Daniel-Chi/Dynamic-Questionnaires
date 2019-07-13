@@ -26,7 +26,11 @@ class LoginForm extends React.Component {
                 username: this.state.username,
                 password: this.state.password
             })
-        })
+        }).then(res => res.json())
+            .then(resJSON => {
+                console.log(resJSON);
+            })
+            .catch(err => console.error(err));
     }
 
     render() {

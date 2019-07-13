@@ -3,7 +3,7 @@ import FormContainer from "../components/FormContainer/FormContainer"
 import AddButton from "../components/AddButton/AddButton"
 import TextArea from "../components/TextArea/TextArea"
 
-function Questionnaire() {
+const Questionnaire = () => {
     return (
         <React.Fragment>
             <FormContainer/>
