@@ -109,6 +109,10 @@ form .form-group .btn {
   width: 40%;
 }
 
+.option-container {
+  margin-left: 150px;
+}
+
 .option-container .btn {
   margin-top: 15px;
   margin-left: 5px;
