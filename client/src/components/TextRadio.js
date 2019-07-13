@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { componentWillAppendToBody } from 'react-append-to-body';
+
+const AppendedTextBoxes = componentWillAppendToBody(addBox);
 
 class TextRadio extends Component {
+    constructor() {
+        super();
 
-    state = {
-        textValue: "",
-        option: 3
-    }
+        state = {
+            textValue: ""
+        }
+
+    };
 
     handleInputChange = event => {
         const value = event.target.value;
@@ -17,7 +23,7 @@ class TextRadio extends Component {
     }
 
     addBox = () => {
-        
+        return <div className="form-check"><input className="form-check-input" type="radio" value="option" /><label className="form-check-label" for="option"><input class="form-control" type="text" placeholder="" /></label></div>;
     }
 
     removeBox = () => {
@@ -28,23 +34,26 @@ class TextRadio extends Component {
         return(
             <div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" id="option1" name="option1" value="option1" />
-                    <label className="form-check-label" for="option1">
-                        <input class="form-control" type="text" placeholder="Default input" />
+                    <input className="form-check-input" type="radio" value="option" />
+                    <label className="form-check-label" for="option">
+                        <input class="form-control" type="text" placeholder="" />
                     </label>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" id="option2" name="option2" value="option2" />
-                    <label className="form-check-label" for="option2">
-                        <input class="form-control" type="text" placeholder="Default input" />
+                    <input className="form-check-input" type="radio" value="option" />
+                    <label className="form-check-label" for="option">
+                        <input class="form-control" type="text" placeholder="" />
                     </label>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" id="option3" name="option3" value="option3" />
-                    <label className="form-check-label" for="option3">
-                        <input class="form-control" type="text" placeholder="Default input" />
+                    <input className="form-check-input" type="radio" value="option" />
+                    <label className="form-check-label" for="option">
+                        <input class="form-control" type="text" placeholder="" />
                     </label>
                 </div>
+                <AppendedTextBoxes>
+
+                </AppendedTextBoxes>
                 <button type="button" className="btn btn-primary" onClick={this.addBox}>
                     Add Option
                 </button>
