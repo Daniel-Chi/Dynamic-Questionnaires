@@ -34,13 +34,13 @@ class Question extends Component {
                     <div className="answer-choices">
                         {/*clickable images to allow user to choose answer type */}
                         <span className="img-wrapper">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="List Items">
+                            <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="List Items">
                                 <img src={require("./images/itemlist.png")} height="50px" className="answer-type" id="list-img" alt="list"></img>
                             </a>
                         </span>
 
                         <span className="img-wrapper">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Textbox">
+                            <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="Textbox">
                                 <img src={require("./images/textbox.png")} height="65px" className="answer-type" id="textbox-img" alt="textbox"></img>
                             </a>
                         </span>
@@ -52,7 +52,7 @@ class Question extends Component {
                 <br />
                 <hr></hr>
                 {/* clickable image for delete function */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
+                <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
                     <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
                 </a>
                 <br />
