@@ -1,5 +1,4 @@
 import React from 'react'
-import "./addbutton.css"
 
 const AddButton = () => (
     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Click here to add a new question :)">

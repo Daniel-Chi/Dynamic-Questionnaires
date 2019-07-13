@@ -6,24 +6,22 @@ const MainHeader = () => {
             <ul className="nav nav-pills">
                 <li className="nav-item">
                     <a href="#" className="nav-link">
-                        Menu Opt. 1
+                        About
                     </a>
                 </li>
                 <li className="nav-item">
                     <a href="#" className="nav-link">
-                        Menu Opt. 2
+                        Help
                     </a>
                 </li>
                 <li className="nav-item">
                     <a href="#" className="nav-link">
-                        Menu Opt. 3
+                        Account
                     </a>
                 </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-link">
-                        Menu Opt. 4
-                    </a>
-                </li>
+                <p>
+                Dynamic Questionnaire
+                </p>
             </ul>
         </div>
     );

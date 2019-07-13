@@ -14,4 +14,4 @@ const FlowchartSchema = new Schema({
 
 const Flowcharts = mongoose.model("Flowcharts", FlowchartSchema);
 
-export default Flowcharts;
+module.exports = Flowcharts;

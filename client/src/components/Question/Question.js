@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+<<<<<<< HEAD
 import "./question.css"
 import TextArea from "../TextArea/TextArea"
 import List from "../List/List"
 import { throws } from 'assert';
+=======
+>>>>>>> 5b39a929064226ce5a2f6757778d293be43e4165
 
 class Question extends Component {
 

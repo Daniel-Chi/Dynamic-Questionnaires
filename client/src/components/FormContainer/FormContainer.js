@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React, { Component } from 'react'
 import "./formcontainer.css"
+=======
+import React from 'react'
+>>>>>>> 5b39a929064226ce5a2f6757778d293be43e4165
 import Question from "../Question/Question"
 
 
