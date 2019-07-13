@@ -8,7 +8,7 @@ const MainBody = () => (
         <div className="new">
             <form>
                 <div className="form-group">
-                    <label for="newQuestionnaire">
+                    <label htmlFor="newQuestionnaire">
                         Add New Questionnaire
                             </label>
                     <input className="form-control" id="newQuestionnaire" placeholder="Enter the name of your questionnaire here" />
