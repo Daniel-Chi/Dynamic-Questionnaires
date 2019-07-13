@@ -26,8 +26,6 @@ class FormContainer extends Component {
                 <input type="text" id="form-name" placeholder="     Title of your form goes here..."
                     value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
                 <Question />
-                <Question />
-                <Question />
                 <br/>
                 {/* Set up a method to retrieve input from all questions/answers */}
                 <button type="submit" id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>

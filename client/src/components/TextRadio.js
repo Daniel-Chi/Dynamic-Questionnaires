@@ -55,7 +55,7 @@ class TextRadio extends Component {
 
   render() {
     return (
-      <div>
+      <div className="option-container">
         <div className="form-check">
           {this.state.radioButtons.map(radiobutton => {
             return (

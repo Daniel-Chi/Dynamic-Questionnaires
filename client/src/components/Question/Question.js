@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TextArea from "../TextArea/TextArea"
-import List from "../List/List"
+import TextRadio from "../TextRadio"
 import { throws } from 'assert';
 
 class Question extends Component {
@@ -39,7 +39,7 @@ class Question extends Component {
         // if user clicks on the list option
         } else if (this.state.content === "list") {
             return (
-                <List />
+                <TextRadio />
             )
         // default display/if user clicks on return button
         } else {
