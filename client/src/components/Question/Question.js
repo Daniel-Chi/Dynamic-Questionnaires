@@ -26,10 +26,11 @@ class Question extends Component {
                     value={this.state.questionTitle} onChange={this.handleInputChange} name="questionTitle"/>
                 </div>
                 <hr />
+
+                {/* onClick replace everything here  */}
                 <div id="answer-wrapper">
                     <p id="pls-select-ans">Please select an answer type:</p>
                     <div className="answer-choices">
-                        {/*clickable images to allow user to choose answer type */}
                         <span className="img-wrapper">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="List Items">
                                 <img src={require("./images/itemlist.png")} height="50px" className="answer-type" id="list-img" alt="list"></img>
