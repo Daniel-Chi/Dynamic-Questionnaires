@@ -21,7 +21,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+<<<<<<< HEAD
+=======
     "bcrypt": "^3.0.6",
+>>>>>>> 5b39a929064226ce5a2f6757778d293be43e4165
     "bootstrap": "^4.3.1",
     "express": "^4.16.3",
     "express-flash": "0.0.2",
