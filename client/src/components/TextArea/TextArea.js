@@ -20,7 +20,7 @@ class TextArea extends Component {
 
     render() {
         return (
-            <textarea rows="5" cols="35" value={this.state.textValue} onChange={this.handleInputChange} name="textValue" placeholder="Type out your answer here."/>
+            <textarea rows="5" cols="59" value={this.state.textValue} onChange={this.handleInputChange} name="textValue" placeholder="Type out your answer here."/>
         );
     }
 }

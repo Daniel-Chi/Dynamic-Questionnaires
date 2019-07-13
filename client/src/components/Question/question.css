@@ -44,3 +44,15 @@
     position: relative;
     right: 10px;
 }
+
+/* Return button */
+#return-img {
+    float: right;
+    position: relative;
+    right: 20px;
+}
+
+TextArea {
+    position: relative;
+    left: 11%;
+}
