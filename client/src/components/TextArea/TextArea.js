@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
 class TextArea extends Component {
-    // Setting the component's initial state
+
+    //Setting the component's initial state
     state = {
         textValue: ""
     };
@@ -14,15 +15,12 @@ class TextArea extends Component {
         // Updating the input's state
         this.setState({
             [name]: value
-        });
-
-        //textValue is one char behind display
-        console.log(`Textbox: ${this.state.textValue}`);
+        }, () => {console.log(`Textbox: ${this.state.textValue}`); });
     };
 
     render() {
         return (
-            <textarea row="20" value={this.state.textValue} onChange={this.handleInputChange} name="textValue"/>
+            <textarea rows="5" cols="59" value={this.state.textValue} onChange={this.handleInputChange} name="textValue" placeholder="Type out your answer here."/>
         );
     }
 }
