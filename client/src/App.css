@@ -1,3 +1,8 @@
+TextArea {
+  position: relative;
+  left: 11%;
+}
+
 form {
   margin-left: 200px;
 }
@@ -135,6 +140,17 @@ form .form-group .btn {
   margin-top: 20px;
   position: relative;
   left: 11%;
+}
+
+#return-img {
+  float: right;
+  position: relative;
+  right: 20px;
+}
+
+#submit-btn {
+  position: relative;
+  left: 46%;
 }
 
 #textbox-img {
