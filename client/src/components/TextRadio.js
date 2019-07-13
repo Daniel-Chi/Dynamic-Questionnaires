@@ -17,7 +17,7 @@ class TextRadio extends Component {
     }
 
     addBox = () => {
-
+        
     }
 
     removeBox = () => {
@@ -45,10 +45,10 @@ class TextRadio extends Component {
                         <input class="form-control" type="text" placeholder="Default input" />
                     </label>
                 </div>
-                <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={this.addBox}>
                     Add Option
                 </button>
-                <button type="button" className="btn btn-danger">
+                <button type="button" className="btn btn-danger" onClick={this.removeBox}>
                     Remove Option
                 </button>
             </div>
