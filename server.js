@@ -3,7 +3,6 @@ let passport = require("passport");
 const session = require("express-session");
 const flash = require("express-flash");
 const mongoose = require("mongoose");
-const htmlRouter = require("./routes/htmlRoutes");
 const authRouter = require("./routes/authRoutes");
 const initializePassport = require("./config/passport/passport");
 const User = require("./models/Users");
@@ -28,8 +27,6 @@ app.use(flash());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
-htmlRouter(app);
 //Add auth route, passing in app and passport
 authRouter(app, passport);
 //import passport local strategies for login and signup and connect to Users in MongoDB

@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
             })
         }).then(res => res.json())
             .then(resJSON => {
-                if (resJSON._id && resJSON.isAuth) {
+                if (resJSON._id) {
                     this.props.historyPush("/index")
                 }
             })
