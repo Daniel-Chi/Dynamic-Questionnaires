@@ -1,16 +1,11 @@
 const router = require("express").Router();
 const questionController = require("../../controllers/questionController");
-
-// Matches with "/api/books"
-router.route("/question")
+const answersController = require("../../controllers/answersController");
+//Matches with "/api/books"
+router.route("/:questionID")
   .get(questionController.findAll)
-  .post(answerController.create);
-    console.log('made it here');
-//Matches with "/api/books/:id"
-router
-  .route("/:id")
-  .get(questionController.findById)
-  .put(answerController.update)
-  .delete(answerController.remove);
+
+router.route("/seed")
+ .post(questionController.create) 
 
 module.exports = router;
