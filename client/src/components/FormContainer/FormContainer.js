@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Question from "../Question/Question"
 
-
 class FormContainer extends Component {
     //Setting the component's initial state
     state = {
