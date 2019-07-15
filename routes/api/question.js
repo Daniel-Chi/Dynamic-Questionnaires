@@ -6,6 +6,6 @@ router.route("/:questionID")
   .get(questionController.findAll)
 
 router.route("/seed")
- .post(questionController.create) 
+  .post(questionController.create)
 
 module.exports = router;

@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react';
+import TextArea from "../TextArea/TextArea";
+import List from "../List/List";
 
-class Question extends Component {
+class Question extends React.Component {
 
     // Setting the component's initial state
     state = {
@@ -85,7 +87,7 @@ class Question extends Component {
                     <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
                 </a>
                 {/* return button */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
+                <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
                     <img src={require("./images/return.png")} height="30px" id="return-img" alt="return" name="none" onClick={this.handleContentChange}></img>
                 </a>
                 <br />
