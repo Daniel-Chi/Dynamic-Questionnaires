@@ -33,11 +33,6 @@ if (process.env.NODE_ENV === "production") {
 authRouter(app, passport);
 
 app.use(routes);
-//Added apiroutes for schema js's
-//require("./routes/api/question.js")(app)
-// app.get("/questions", (req,res)=>{
-//   questionModel.find()
-//})
 
 //import passport local strategies for login and signup and connect to Users in MongoDB
 initializePassport(passport, User)
