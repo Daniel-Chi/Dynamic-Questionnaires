@@ -17,21 +17,25 @@ class TextRadio extends Component {
   addBox = () => {
     this.setState(prevstate => {
       let radioButtons = prevstate.radioButtons;
+
       if (radioButtons.length === 0) {
         radioButtons.push({
           id: 1,
           name: "radiobutton",
           value: "test"
         });
+
         return {
           radioButtons: radioButtons
         };
-      } else {
+      } 
+      else {
         radioButtons.push({
           id: radioButtons[radioButtons.length - 1].id + 1,
           name: "raiodButton_" + (radioButtons[radioButtons.length - 1].id + 1),
           value: radioButtons[radioButtons.length - 1].value
         });
+
         return {
           radioButtons: radioButtons
         };
@@ -42,12 +46,15 @@ class TextRadio extends Component {
   removeBox = () => {
     this.setState(prevstate => {
       let radioButtons = prevstate.radioButtons;
+
       if (radioButtons.length !== 0) {
         radioButtons.pop(radioButtons[radioButtons.length - 1]);
+
         return {
           radioButtons: radioButtons
         };
-      } else {
+      } 
+      else {
         return { radioButtons: radioButtons };
       }
     });
