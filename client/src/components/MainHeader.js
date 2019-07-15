@@ -5,17 +5,17 @@ const MainHeader = () => {
         <div>
             <ul className="nav nav-pills">
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href={window.location.pathname} className="nav-link">
                         About
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href={window.location.pathname} className="nav-link">
                         Help
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <a href={window.location.pathname} className="nav-link">
                         Account
                     </a>
                 </li>

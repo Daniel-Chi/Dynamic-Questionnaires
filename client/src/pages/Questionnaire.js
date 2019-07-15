@@ -2,7 +2,7 @@ import React from 'react';
 import FormContainer from "../components/FormContainer/FormContainer"
 import AddButton from "../components/AddButton/AddButton"
 
-function Questionnaire() {
+const Questionnaire = () => {
     return (
         <React.Fragment>
             <FormContainer/>

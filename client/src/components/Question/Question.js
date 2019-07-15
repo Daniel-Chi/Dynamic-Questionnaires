@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-<<<<<<< HEAD
-import "./question.css"
-import TextArea from "../TextArea/TextArea"
-import List from "../List/List"
-import { throws } from 'assert';
-=======
->>>>>>> 5b39a929064226ce5a2f6757778d293be43e4165
+// import "./question.css"
+// import TextArea from "../TextArea/TextArea"
+// import List from "../List/List"
+// import { throws } from 'assert';
 
 class Question extends Component {
 
@@ -88,7 +85,7 @@ class Question extends Component {
                 <br />
                 <hr></hr>
                 {/* clickable image for delete function */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
+                <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
                     <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
                 </a>
                 {/* return button */}

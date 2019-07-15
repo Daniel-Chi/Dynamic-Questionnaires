@@ -26,7 +26,13 @@ class LoginForm extends React.Component {
                 username: this.state.username,
                 password: this.state.password
             })
-        })
+        }).then(res => res.json())
+            .then(resJSON => {
+                if (resJSON._id) {
+                    this.props.historyPush("/index")
+                }
+            })
+            .catch(err => console.error(err));
     }
 
     render() {
@@ -34,7 +40,7 @@ class LoginForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit} className="col s12">
                     <div className="form-group">
-                        <label for="inputUserName">
+                        <label htmlFor="inputUserName">
                             Username:
                         </label>
                         <input
@@ -47,7 +53,7 @@ class LoginForm extends React.Component {
                             required />
                     </div>
                     <div className="form-group">
-                        <label for="inputPassword">
+                        <label htmlFor="inputPassword">
                             Password:
                         </label>
                         <input
