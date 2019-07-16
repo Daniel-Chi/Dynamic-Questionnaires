@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import "./question.css"
 import TextArea from "../TextArea/TextArea"
 import List from "../List/List"
-import { throws } from 'assert';
 
 class Question extends Component {
 
@@ -37,13 +36,13 @@ class Question extends Component {
             return (
                 <TextArea />
             )
-        // if user clicks on the list option
+            // if user clicks on the list option
         } else if (this.state.content === "list") {
             return (
                 <List />
             )
-        // default display/if user clicks on return button
-        } else {
+            // default display/if user clicks on return button
+        } else if (this.state.content === "none") {
             return (
                 <React.Fragment>
                     <div id="answer-wrapper">
@@ -51,6 +50,7 @@ class Question extends Component {
                         <div className="answer-choices">
                             {/*clickable images to allow user to choose answer type */}
                             <span className="img-wrapper">
+                                {/* List */}
                                 <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="List Items">
                                     <img src={require("./images/itemlist.png")} height="50px" name="list" className="answer-type" id="list-img" alt="list" onClick={this.handleContentChange}></img>
                                 </a>
@@ -58,6 +58,7 @@ class Question extends Component {
 
                             <span className="img-wrapper">
                                 <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="Textbox">
+                                    {/* Textbox */}
                                     <img src={require("./images/textbox.png")} height="65px" name="text" className="answer-type" id="textbox-img" alt="textbox" onClick={this.handleContentChange}></img>
                                 </a>
                             </span>
@@ -72,32 +73,32 @@ class Question extends Component {
     }
 
     render() {
-        return (
-            <div className="question-container">
-                <div className="question">
-                    <input type="text" id="question-title" placeholder="  Type out your question here..."
-                        value={this.state.questionTitle} onChange={this.handleInputChange} name="questionTitle" />
+        if (this.state.content === "delete") {
+            return null;
+        } else {
+            return (
+                <div className="question-container">
+                    <div className="question">
+                        <input type="text" id="question-title" placeholder="  Type out your question here..."
+                            value={this.state.questionTitle} onChange={this.handleInputChange} name="questionTitle" />
+                    </div>
+                    <hr />
+                    {this.renderContent()}
+                    <br />
+                    <hr></hr>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
+                        <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete" name="delete" onClick={this.handleContentChange}></img>
+                    </a>
+
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
+                        <img src={require("./images/return.png")} height="30px" id="return-img" alt="return" name="none" onClick={this.handleContentChange}></img>
+                    </a>
+                    <br />
+                    <br />
                 </div>
-                <hr />
-
-                {this.renderContent()}
-
-                <br />
-                <hr></hr>
-                {/* clickable image for delete function */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
-                    <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
-                </a>
-                {/* return button */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
-                    <img src={require("./images/return.png")} height="30px" id="return-img" alt="return" name="none" onClick={this.handleContentChange}></img>
-                </a>
-                <br />
-                <br />
-            </div>
-        )
+            )
+        }
     }
-
 }
 
 export default Question;

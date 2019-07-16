@@ -4,8 +4,7 @@ function List(props) {
   return (
     <React.Fragment>
       <div>
-        <input type="radio" id="huey" name="drone" value="huey"
-          checked />
+        <input type="radio" id="huey" name="drone" value="huey"/>
         <label for="huey">Huey</label>
       </div>
 
