@@ -35,6 +35,10 @@ class LoginForm extends React.Component {
             .catch(err => console.error(err));
     }
 
+    redirectOtherAuth = () => {
+        this.props.historyPush(this.props.otherAuth)
+    }
+
     render() {
         return (
             <div>
@@ -69,7 +73,11 @@ class LoginForm extends React.Component {
                         Submit
                     </button>
                     <div className="button-pos">
-                        <button type="button" className="btn btn-primary">
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={this.redirectOtherAuth}
+                        >
                             {this.props.otherAuth}
                         </button>
                     </div>
