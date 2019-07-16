@@ -86,11 +86,11 @@ class Question extends Component {
                     {this.renderContent()}
                     <br />
                     <hr></hr>
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
+                    <a href="/questionnaire" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
                         <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete" name="delete" onClick={this.handleContentChange}></img>
                     </a>
 
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
+                    <a href="/questionnaire" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
                         <img src={require("./images/return.png")} height="30px" id="return-img" alt="return" name="none" onClick={this.handleContentChange}></img>
                     </a>
                     <br />

@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from "../components/Footer"
 import MainHeader from "../components/MainHeader"
 
-function NotFound() {
+const NotFound = () => {
     return (
         <React.Fragment>
         <MainHeader/>
