@@ -48,11 +48,12 @@ form {
 .footer {
     margin-bottom: 0px;
     margin-top: 25px;
+    position: relative;
     .container {
         #footer-text {
-            position: absolute;
-            top: 620px;
-            right: 10px;
+            position: relative;
+            right: -700px;
+            top: 60px;
             font-size: 10px;
             font-family: $mainfont;
         }
