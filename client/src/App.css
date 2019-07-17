@@ -1,3 +1,8 @@
+TextArea {
+  position: relative;
+  left: 11%;
+}
+
 form {
   margin-left: 200px;
 }
@@ -41,6 +46,22 @@ form .form-group .btn {
   right: 10px;
   font-size: 10px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-check {
+  margin-left: 5px;
+}
+
+.form-check .form-check-input {
+  margin-top: 5px;
+}
+
+.form-check .form-check-label {
+  margin-top: 5px;
+}
+
+.form-check .form-check-label .form-controll {
+  margin-top: 5px;
 }
 
 .header .container .button-pos {
@@ -88,6 +109,19 @@ form .form-group .btn {
   width: 40%;
 }
 
+.option-container {
+  margin-left: 150px;
+}
+
+.option-container .btn {
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.option-container .btn-danger {
+  margin-left: 5px;
+}
+
 .question-container {
   border: 1px solid black;
   border-radius: 10px;
@@ -99,7 +133,7 @@ form .form-group .btn {
 #add-img {
   position: relative;
   left: 85%;
-  bottom: 150px;
+  bottom: 200px;
 }
 
 #delete-img {
@@ -135,6 +169,17 @@ form .form-group .btn {
   margin-top: 20px;
   position: relative;
   left: 11%;
+}
+
+#return-img {
+  float: right;
+  position: relative;
+  right: 20px;
+}
+
+#submit-btn {
+  position: relative;
+  left: 46%;
 }
 
 #textbox-img {

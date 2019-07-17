@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import "./question.css"
 import TextArea from "../TextArea/TextArea"
-import List from "../List/List"
+import TextRadio from "../TextRadio"
 import { throws } from 'assert';
 
 class Question extends Component {
@@ -30,19 +29,19 @@ class Question extends Component {
         })
     }
 
-    //Method for conditional rendering
+
     renderContent = () => {
         // if user clicks on textbox option
         if (this.state.content === "text") {
             return (
                 <TextArea />
             )
-        // if user clicks on the list option
+            // if user clicks on the list option
         } else if (this.state.content === "list") {
             return (
-                <List />
+                <TextRadio />
             )
-        // default display/if user clicks on return button
+            // default display/if user clicks on return button
         } else {
             return (
                 <React.Fragment>
@@ -51,14 +50,41 @@ class Question extends Component {
                         <div className="answer-choices">
                             {/*clickable images to allow user to choose answer type */}
                             <span className="img-wrapper">
-                                <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="List Items">
-                                    <img src={require("./images/itemlist.png")} height="50px" name="list" className="answer-type" id="list-img" alt="list" onClick={this.handleContentChange}></img>
+                                <a
+                                    href="/questionnaire"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="List Items"
+                                    onClick={this.handleContentChange}
+                                >
+                                    <img
+                                        src={require("./images/itemlist.png")}
+                                        height="50px"
+                                        name="list"
+                                        className="answer-type"
+                                        id="list-img"
+                                        alt="list"
+                                    >
+                                    </img>
                                 </a>
                             </span>
 
                             <span className="img-wrapper">
-                                <a href={window.location.pathname} data-toggle="tooltip" data-placement="bottom" title="Textbox">
-                                    <img src={require("./images/textbox.png")} height="65px" name="text" className="answer-type" id="textbox-img" alt="textbox" onClick={this.handleContentChange}></img>
+                                <a
+                                    href="/questionnaire"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Textbox"
+                                    onClick={this.handleContentChange}
+                                >
+                                    <img
+                                        src={require("./images/textbox.png")}
+                                        height="65px"
+                                        name="text"
+                                        className="answer-type"
+                                        id="textbox-img"
+                                        alt="textbox"
+                                    ></img>
                                 </a>
                             </span>
                         </div>
@@ -70,6 +96,7 @@ class Question extends Component {
             )
         }
     }
+
 
     render() {
         return (
@@ -85,12 +112,29 @@ class Question extends Component {
                 <br />
                 <hr></hr>
                 {/* clickable image for delete function */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
+                <a
+                    href="/questionnaire"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Delete this question :("
+                >
                     <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
                 </a>
                 {/* return button */}
-                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
-                    <img src={require("./images/return.png")} height="30px" id="return-img" alt="return" name="none" onClick={this.handleContentChange}></img>
+                <a
+                    href="/questionnaire"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Return to answer types selection"
+                    onClick={this.handleContentChange}
+                >
+                    <img
+                        src={require("./images/return.png")}
+                        height="30px"
+                        id="return-img"
+                        alt="return"
+                        name="none"
+                    ></img>
                 </a>
                 <br />
                 <br />
