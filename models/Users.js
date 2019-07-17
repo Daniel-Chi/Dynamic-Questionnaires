@@ -11,10 +11,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    flowchartIds: {
+    flowchartIds: [{
         type: Schema.Types.ObjectId,
         ref: "Flowcharts"
-    }
+    }]
 });
 
 const User = mongoose.model("Users", UserSchema);

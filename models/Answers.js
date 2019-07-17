@@ -2,16 +2,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AnswerSchema = new Schema({
-    answerType: {
+    answer: {
         type: String,
         required: true
     },
-    placeholder: {
-        type: String
-    },
-    nextQuestionId: {
-        type: Schema.Types.ObjectId,
-        ref: "Questions"
+    // placeholder: {
+    //     type: String
+    // },
+    // parentQuestionId: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Questions"
+    // },
+    nextQuestion: {
+        type: String//Schema.Types.ObjectId,
+       // ref: "Questions"
     }
 });
 

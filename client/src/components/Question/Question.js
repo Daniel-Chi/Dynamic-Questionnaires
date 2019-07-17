@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import "./question.css"
-// import TextArea from "../TextArea/TextArea"
-// import List from "../List/List"
+import TextArea from "../TextArea/TextArea"
+import List from "../List/List"
 // import { throws } from 'assert';
 
 class Question extends Component {

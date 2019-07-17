@@ -1,6 +1,6 @@
 module.exports = {
    // userController: require('./userController'),
-    questionController: require('./questionController'),
+    questionController: require('./questionController')
    // flowchartController: require("./flowchartController"),
-   // answersController: require("./answersController")
+   //answersController: require("./answersController")
 };

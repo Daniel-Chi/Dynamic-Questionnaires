@@ -7,6 +7,7 @@ const routes = require("./routes/api")
 const authRouter = require("./routes/authRoutes");
 const initializePassport = require("./config/passport/passport");
 const User = require("./models/Users");
+const path = require("path");
 //const questionController = require("./models/questionController");
 
 //initialize app and use PORT 3001 for Dev backend server
@@ -34,6 +35,10 @@ authRouter(app, passport);
 
 app.use(routes);
 
+//Route to use for data insertion form
+app.get("/seed", (req,res)=>{
+  res.sendFile(path.join(__dirname, "./form.html" ))
+ });
 //import passport local strategies for login and signup and connect to Users in MongoDB
 initializePassport(passport, User)
 
