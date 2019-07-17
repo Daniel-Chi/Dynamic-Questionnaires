@@ -3,11 +3,11 @@ import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import Footer from '../components/Footer';
 
-const Login = (props) => {
+function Login() {
   return (
     <div>
       <Header />
-      <LoginForm historyPush={props.history.push} authenticationRoute="/login" otherAuth="Signup" />
+      <LoginForm authenticationRoute="/login" otherAuth="Signup" />
       <Footer />
     </div>
   );
