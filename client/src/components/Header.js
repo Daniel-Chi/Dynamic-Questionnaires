@@ -23,13 +23,13 @@ class Header extends Component {
                     <div className="container">
 
                         <ul className="fly-in-text hidden">
-                            <li>W</li>
-                            <li>E</li>
-                            <li>L</li>
-                            <li>C</li>
-                            <li>O</li>
+                            <li>D</li>
+                            <li>Y</li>
+                            <li>N</li>
+                            <li>A</li>
                             <li>M</li>
-                            <li>E</li>
+                            <li>I</li>
+                            <li>C</li>
                         </ul>
                     </div>
                 </div>
