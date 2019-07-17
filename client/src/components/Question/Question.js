@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import TextArea from "../TextArea/TextArea"
 import TextRadio from "../TextRadio"
-import { throws } from 'assert';
 
 class Question extends Component {
 
@@ -42,7 +41,7 @@ class Question extends Component {
                 <TextRadio />
             )
             // default display/if user clicks on return button
-        } else {
+        } else if (this.state.content === "none"){
             return (
                 <React.Fragment>
                     <div id="answer-wrapper">
@@ -99,47 +98,52 @@ class Question extends Component {
 
 
     render() {
-        return (
-            <div className="question-container">
-                <div className="question">
-                    <input type="text" id="question-title" placeholder="  Type out your question here..."
-                        value={this.state.questionTitle} onChange={this.handleInputChange} name="questionTitle" />
+        if (this.state.content === "delete"){
+            return null;
+        }
+        else {
+            return (
+                <div className="question-container">
+                    <div className="question">
+                        <input type="text" id="question-title" placeholder="  Type out your question here..."
+                            value={this.state.questionTitle} onChange={this.handleInputChange} name="questionTitle" />
+                    </div>
+                    <hr />
+    
+                    {this.renderContent()}
+    
+                    <br />
+                    <hr></hr>
+                    {/* clickable image for delete function */}
+                    <a
+                        href="/questionnaire"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Delete this question :("
+                    >
+                        <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
+                    </a>
+                    {/* return button */}
+                    <a
+                        href="/questionnaire"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Return to answer types selection"
+                        onClick={this.handleContentChange}
+                    >
+                        <img
+                            src={require("./images/return.png")}
+                            height="30px"
+                            id="return-img"
+                            alt="return"
+                            name="none"
+                        ></img>
+                    </a>
+                    <br />
+                    <br />
                 </div>
-                <hr />
-
-                {this.renderContent()}
-
-                <br />
-                <hr></hr>
-                {/* clickable image for delete function */}
-                <a
-                    href="/questionnaire"
-                    data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Delete this question :("
-                >
-                    <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
-                </a>
-                {/* return button */}
-                <a
-                    href="/questionnaire"
-                    data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="Return to answer types selection"
-                    onClick={this.handleContentChange}
-                >
-                    <img
-                        src={require("./images/return.png")}
-                        height="30px"
-                        id="return-img"
-                        alt="return"
-                        name="none"
-                    ></img>
-                </a>
-                <br />
-                <br />
-            </div>
-        )
+            )
+        }
     }
 
 }

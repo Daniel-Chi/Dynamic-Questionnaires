@@ -7,7 +7,7 @@ import Main from './pages/Main';
 import NotFound from './pages/NotFound';
 import Questionnaire from './pages/Questionnaire';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
