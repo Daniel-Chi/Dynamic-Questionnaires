@@ -9,6 +9,18 @@ class FormContainer extends React.Component {
         formTitle: ""
     };
 
+    //before mount, check for authentication
+    //if not authenticated, redirect back to login
+    componentWillMount() {
+        fetch("/auth")
+            .then(res => res.json())
+            .then(resJSON => {
+                if (!resJSON._id) {
+                    this.props.historyPush("/");
+                }
+            });
+    }
+
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
         const value = event.target.value;
