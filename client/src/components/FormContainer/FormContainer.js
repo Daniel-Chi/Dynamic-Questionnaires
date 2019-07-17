@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import "./formcontainer.css"
 import Question from "../Question/Question"
 
 

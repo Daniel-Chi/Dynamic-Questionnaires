@@ -3,6 +3,12 @@ $textcolor: white;
 $mainpositioning: relative;
 $mainfont: Arial, Helvetica, sans-serif;
 
+
+TextArea {
+    position: $mainpositioning;
+    left: 11%;
+}
+
 form {
     margin-left: 200px;
     .form-group {
@@ -152,6 +158,17 @@ form {
     margin-top: 20px;
     position: $mainpositioning;
     left: 11%;
+}
+
+#return-img {
+    float: right;
+    position: $mainpositioning;
+    right: 20px;
+}
+
+#submit-btn {
+    position: $mainpositioning;
+    left: 46%;
 }
 
 #textbox-img {
