@@ -21,6 +21,11 @@ class FormContainer extends React.Component {
             });
     }
 
+    //on mount, get first question
+    componentDidMount() {
+
+    }
+
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
         const value = event.target.value;
