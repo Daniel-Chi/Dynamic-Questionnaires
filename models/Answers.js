@@ -6,12 +6,16 @@ const AnswerSchema = new Schema({
         type: String,
         required: true
     },
-    placeholder: {
+    name: {
         type: String
     },
-    nextQuestionId: {
-        type: Schema.Types.ObjectId,
-        ref: "Questions"
+    // parentQuestionId: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Questions"
+    // },
+    nextQuestion: {
+        type: String//Schema.Types.ObjectId,
+       // ref: "Questions"
     }
 });
 
