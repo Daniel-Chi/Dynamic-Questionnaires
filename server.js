@@ -3,7 +3,7 @@ let passport = require("passport");
 const session = require("express-session");
 const flash = require("express-flash");
 const mongoose = require("mongoose");
-const htmlRouter = require("./routes/htmlRoutes");
+const apiRoutes = require("./routes/api")
 const authRouter = require("./routes/authRoutes");
 const initializePassport = require("./config/passport/passport");
 const User = require("./models/Users");
@@ -30,12 +30,10 @@ app.use(flash());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
-htmlRouter(app);
 //Add auth route, passing in app and passport
 authRouter(app, passport);
 
-app.use(routes);
+app.use(apiRoutes);
 
 //Route to use for data insertion form
 app.get("/seed", (req,res)=>{
