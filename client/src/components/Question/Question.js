@@ -30,7 +30,7 @@ class Question extends Component {
                 <TextRadio />
             )
             // default display/if user clicks on return button
-        } else if (this.state.content === "none"){
+        } else if (this.state.content === "none") {
             return (
                 <React.Fragment>
                     <div id="answer-wrapper">
@@ -87,7 +87,7 @@ class Question extends Component {
 
 
     render() {
-        if (this.state.content === "delete"){
+        if (this.state.content === "delete") {
             return null;
         }
         else {
@@ -100,19 +100,26 @@ class Question extends Component {
                         </form>
                     </div>
                     <hr />
-    
+
                     {this.renderContent()}
-    
+
                     <br />
                     <hr></hr>
-                    {/* clickable image for delete function */}
+                    {/* delete button */}
                     <a
                         href="/questionnaire"
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Delete this question :("
+                        onClick={this.handleContentChange}
                     >
-                        <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete"></img>
+                        <img
+                            src={require("./images/delete.png")}
+                            height="30px"
+                            id="delete-img"
+                            name="delete"
+                            alt="delete">
+                        </img>
                     </a>
                     {/* return button */}
                     <a
