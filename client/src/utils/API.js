@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // get all forms owned by a user
-  getAllFormTitles: (user_id) => {
+  getAllForms: (user_id) => {
     return axios.get("/api/forms/?user=" + user_id);
   },
   // get the first question of the form
