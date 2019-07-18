@@ -1,7 +1,5 @@
 import React from 'react'
 import "./formcontainer.css"
-import Question from "../Question/Question"
-import AddButton from "../AddButton/AddButton"
 import API from "../../utils/API"
 
 class FormContainer extends React.Component {
@@ -51,12 +49,20 @@ class FormContainer extends React.Component {
         // Updating the input's state
         this.setState({
             [name]: value
-        }, () => { console.log(`Textbox: ${this.state.formTitle}`); });
+        }, () => {
+            console.log(`Form Title: ${this.state.formTitle}`);
+            console.log(`Question Title: ${this.state.questionTitle}`);
+            console.log(`Textbox: ${this.state.textValue}`);
+        });
     };
 
+    // this function retrieves all form data on submit
     handleSubmit = event => {
         event.preventDefault();
-        console.log(event)
+        console.log(`Form Title: ${this.state.formTitle}`)
+        console.log(`Question Title: ${this.state.questionTitle}`);
+        console.log(`Textbox: ${this.state.textValue}`);
+
     }
 
     render() {
@@ -70,16 +76,13 @@ class FormContainer extends React.Component {
                                 value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
                         </form>
                     </div>
-                    <div id="question-container">
-                        <Question />
-                    </div>
+                    {this.props.children}
                     <br />
                     {/* Submit - Set up a method to retrieve input from all questions/answers*/}
                     <button type="submit" onClick={this.handleSubmit} id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
                     <br />
                     <br />
                 </div>
-                <AddButton />
             </React.Fragment>
         );
     }
