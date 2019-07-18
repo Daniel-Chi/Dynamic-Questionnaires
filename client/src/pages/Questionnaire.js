@@ -1,7 +1,7 @@
 import React from 'react';
 import FormContainer from "../components/FormContainer/FormContainer"
 
-function Questionnaire() {
+const Questionnaire = () => {
     return (
         <React.Fragment>
             <FormContainer/>
