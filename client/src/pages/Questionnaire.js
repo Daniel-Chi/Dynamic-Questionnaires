@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import FormContainer from "../components/FormContainer/FormContainer"
 import AddButton from "../components/AddButton/AddButton"
-import TextRadio from "../components/TextRadio"
 import Question from '../components/Question/Question';
 
 class Questionnaire extends Component {
     state = {
-        questions: [{id: 1, name: "question", value: "text"}],
+        questions: [{ id: 1, name: "question", value: "text" }],
         questionTitle: ""
     }
 
     handleInputChange = event => {
-        const value = event.target.value;
-        const name = event.target.name;
+        const { name, value } = event.target
+        this.setState({
+            [name]: value
+        })
     };
 
     addQuestion = () => {
@@ -56,7 +57,7 @@ class Questionnaire extends Component {
     render() {
         return (
             <React.Fragment>
-                <FormContainer>
+                <FormContainer historyPush={this.props.history.push}>
                     {this.state.questions.map(item => {
                         return (
                             <Question

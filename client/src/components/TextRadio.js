@@ -10,8 +10,10 @@ class TextRadio extends Component {
   }
 
   handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
+    const { name, value } = event.target
+    this.setState({
+      [name]: value
+    })
   };
 
   addBox = () => {
@@ -28,7 +30,7 @@ class TextRadio extends Component {
         return {
           radioButtons: radioButtons
         };
-      } 
+      }
       else {
         radioButtons.push({
           id: radioButtons[radioButtons.length - 1].id + 1,
@@ -53,7 +55,7 @@ class TextRadio extends Component {
         return {
           radioButtons: radioButtons
         };
-      } 
+      }
       else {
         return { radioButtons: radioButtons };
       }

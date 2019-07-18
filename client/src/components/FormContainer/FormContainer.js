@@ -1,12 +1,45 @@
-import React, { Component } from 'react'
-import Question from "../Question/Question"
+import React from 'react'
+import "./formcontainer.css"
+import API from "../../utils/API"
 
-class FormContainer extends Component {
-    // Setting the component's initial state
+class FormContainer extends React.Component {
+    //Setting the component's initial state
     state = {
-        formTitle: "",
-        questionTitle: ""
+        formTitle: this.props.match.params.formName,
+        questions: []
     };
+
+    //before mount, check for authentication
+    //if not authenticated, redirect back to login
+    componentWillMount() {
+        fetch("/auth")
+            .then(res => res.json())
+            .then(resJSON => {
+                if (!resJSON._id) {
+                    this.props.historyPush("/");
+                }
+            });
+    }
+
+    //on mount, get first question
+    componentDidMount() {
+        //avoid cannot read property __ of undefined errors
+        if (this.props.match && this.props.match.params) {
+            //give form_id from url params in order to get question
+            API.getFirstQuestion(this.props.match.params.id)
+                .then(res => {
+                    if (res) {
+                        //set state with first question
+                        this.setState(prev => {
+                            return { questions: prev.state.questions.push(res) }
+                        })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    }
 
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change

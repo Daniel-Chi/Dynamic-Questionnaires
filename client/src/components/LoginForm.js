@@ -7,6 +7,18 @@ class LoginForm extends React.Component {
         password: ""
     };
 
+    //before mount, check for authentication
+    //redirect to index if already authenticated
+    componentWillMount() {
+        fetch("/auth")
+            .then(res => res.json())
+            .then(resJSON => {
+                if (resJSON._id) {
+                    this.props.historyPush("/index");
+                }
+            });
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -16,6 +28,7 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        //post route to login/signup handled in express server
         fetch(this.props.authenticationRoute, {
             method: 'POST',
             headers: {
@@ -28,11 +41,17 @@ class LoginForm extends React.Component {
             })
         }).then(res => res.json())
             .then(resJSON => {
-                if (resJSON._id){
-                    this.props.historyPush("/index");
+                //on successful login/signup, redirect to index
+                if (resJSON._id) {
+                    this.props.historyPush("/index")
                 }
             })
             .catch(err => console.err(err));
+    }
+
+    //function for button onClick to switch pages between login and signup
+    redirectOtherAuth = () => {
+        this.props.historyPush(this.props.otherAuth)
     }
 
     render() {
@@ -69,7 +88,11 @@ class LoginForm extends React.Component {
                         Submit
                     </button>
                     <div className="button-pos">
-                        <button type="button" className="btn btn-primary">
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={this.redirectOtherAuth}
+                        >
                             {this.props.otherAuth}
                         </button>
                     </div>

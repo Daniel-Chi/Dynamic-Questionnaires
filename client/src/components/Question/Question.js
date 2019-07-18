@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import TextRadio from "../TextRadio"
 
-class Question extends Component {
+class Question extends React.Component {
 
     // Setting the component's initial state
     state = {
