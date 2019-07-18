@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-class TextArea extends Component {
+class TextArea extends React.Component {
 
     //Setting the component's initial state
     state = {
