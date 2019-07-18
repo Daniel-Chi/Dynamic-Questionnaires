@@ -28,11 +28,11 @@ class LoginForm extends React.Component {
             })
         }).then(res => res.json())
             .then(resJSON => {
-                if (resJSON._id) {
-                    this.props.historyPush("/index")
+                if (resJSON._id){
+                    this.props.historyPush("/index");
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => console.err(err));
     }
 
     render() {

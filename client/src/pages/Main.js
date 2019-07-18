@@ -3,11 +3,11 @@ import Mainheader from '../components/MainHeader';
 import MainBody from '../components/MainBody/MainBody';
 import Footer from '../components/Footer';
 
-const Main = (props) => {
-    return (
+function MainMenu () {
+    return(
         <div>
             <Mainheader />
-            <MainBody historyPush={props.history.push} />
+            <MainBody />
             <div className="main">
                 <Footer />
             </div>
@@ -15,4 +15,4 @@ const Main = (props) => {
     );
 };
 
-export default Main;
+export default MainMenu;

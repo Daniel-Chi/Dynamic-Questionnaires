@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import "./formcontainer.css"
 import Question from "../Question/Question"
-import AddButton from "../AddButton/AddButton"
 
 class FormContainer extends Component {
     // Setting the component's initial state
