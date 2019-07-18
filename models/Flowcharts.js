@@ -9,6 +9,10 @@ const FlowchartSchema = new Schema({
     questionId: {
         type: Schema.Types.ObjectId,
         ref: "Questions"
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "Users"
     }
 });
 
