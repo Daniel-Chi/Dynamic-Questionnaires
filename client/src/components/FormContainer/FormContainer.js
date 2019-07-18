@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import Question from "../Question/Question"
 
 class FormContainer extends Component {
-    //Setting the component's initial state
+    // Setting the component's initial state
     state = {
-        formTitle: ""
+        formTitle: "",
+        questionTitle: ""
     };
 
     handleInputChange = event => {
@@ -15,28 +16,41 @@ class FormContainer extends Component {
         // Updating the input's state
         this.setState({
             [name]: value
-        }, () => { console.log(`Textbox: ${this.state.formTitle}`); });
+        }, () => {
+            console.log(`Form Title: ${this.state.formTitle}`);
+            console.log(`Question Title: ${this.state.questionTitle}`);
+            console.log(`Textbox: ${this.state.textValue}`);
+        });
     };
+
+    // this function retrieves all form data on submit
+    handleSubmit = event => {
+        event.preventDefault();
+        console.log(`Form Title: ${this.state.formTitle}`)
+        console.log(`Question Title: ${this.state.questionTitle}`);
+        console.log(`Textbox: ${this.state.textValue}`);
+
+    }
 
     render() {
         return (
-            <div id="questionnaire-container">
-                <br />
-                <input
-                    type="text"
-                    id="form-name"
-                    placeholder="Title of your form goes here..."
-                    value={this.state.formTitle}
-                    onChange={this.handleInputChange}
-                    name="formTitle"
-                />
-                {this.props.children}
-                <br />
-                {/* Set up a method to retrieve input from all questions/answers */}
-                <button type="submit" id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
-                <br />
-                <br />
-            </div>
+            <React.Fragment>
+                <div id="questionnaire-container">
+                    <div id="title-container">
+                        <br />
+                        <form>
+                            <input type="text" id="form-name" placeholder="     Title of your form goes here..."
+                                value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
+                        </form>
+                    </div>
+                    {this.props.children}
+                    <br />
+                    {/* Submit - Set up a method to retrieve input from all questions/answers*/}
+                    <button type="submit" onClick={this.handleSubmit} id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
+                    <br />
+                    <br />
+                </div>
+            </React.Fragment>
         );
     }
 }

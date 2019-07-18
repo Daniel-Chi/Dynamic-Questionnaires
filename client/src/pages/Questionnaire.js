@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormContainer from "../components/FormContainer/FormContainer"
 import AddButton from "../components/AddButton/AddButton"
-import TextArea from "../components/TextArea/TextArea"
 import TextRadio from "../components/TextRadio"
 import Question from '../components/Question/Question';
 
@@ -58,11 +57,12 @@ class Questionnaire extends Component {
         return (
             <React.Fragment>
                 <FormContainer>
-                    {this.state.questions.map(questions => {
+                    {this.state.questions.map(item => {
                         return (
                             <Question
                                 handleClick={this.handleContentChange}
                                 renderContent={this.renderContent}
+                                key={item.id}
                             />
                         );
                     })}
@@ -74,5 +74,3 @@ class Questionnaire extends Component {
 };
 
 export default Questionnaire;
-
-//
