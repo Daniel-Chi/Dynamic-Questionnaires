@@ -2,9 +2,6 @@ const db = require("../models");
 
 // Defining methods for the answerController
 console.log(db.Answers);
-console.log("-----------");
-
-
 
 module.exports = {
 
