@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import "./formcontainer.css"
 import Question from "../Question/Question"
-
+import AddButton from "../AddButton/AddButton"
 
 class FormContainer extends Component {
     //Setting the component's initial state
     state = {
-        formTitle: ""
+        formTitle: "",
     };
 
     handleInputChange = event => {
@@ -20,21 +20,33 @@ class FormContainer extends Component {
         }, () => { console.log(`Textbox: ${this.state.formTitle}`); });
     };
 
+    handleSubmit = event => {
+        event.preventDefault();
+        console.log(event)
+    }
+
     render() {
         return (
-            <div id="questionnaire-container">
-                <br />
-                <input type="text" id="form-name" placeholder="     Title of your form goes here..."
-                    value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
-                <Question />
-                <Question />
-                <Question />
-                <br/>
-                {/* Set up a method to retrieve input from all questions/answers */}
-                <button type="submit" id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
-                <br/>
-                <br/>
-            </div>
+            <React.Fragment>
+                <div id="questionnaire-container">
+                    <div id="title-container">
+                        <br />
+                        <form>
+                            <input type="text" id="form-name" placeholder="     Title of your form goes here..."
+                                value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
+                        </form>
+                    </div>
+                    <div id="question-container">
+                        <Question />
+                    </div>
+                    <br />
+                    {/* Submit - Set up a method to retrieve input from all questions/answers*/}
+                    <button type="submit" onClick={this.handleSubmit} id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
+                    <br />
+                    <br />
+                </div>
+                <AddButton />
+            </React.Fragment>
         );
     }
 }

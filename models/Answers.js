@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AnswerSchema = new Schema({
-    answer: {
+    answerType: {
         type: String,
         required: true
     },
-    // placeholder: {
-    //     type: String
-    // },
+    name: {
+        type: String
+    },
     // parentQuestionId: {
     //     type: Schema.Types.ObjectId,
     //     ref: "Questions"
