@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import "./question.css"
-import TextArea from "../TextArea/TextArea"
 import List from "../List/List"
 
 class Question extends Component {
 
     // Setting the component's initial state
     state = {
-        questionTitle: "",
         content: "none"
-    };
-
-    handleInputChange = event => {
-        // Getting the value and name of the input which triggered the change
-        const value = event.target.value;
-        const name = event.target.name;
-
-        // Updating the input's state
-        this.setState({
-            [name]: value
-        }, () => { console.log(`Textbox: ${this.state.questionTitle}`); });
     };
 
     handleContentChange = event => {
@@ -34,7 +21,9 @@ class Question extends Component {
         // if user clicks on textbox option
         if (this.state.content === "text") {
             return (
-                <TextArea />
+                <form onSubmit={this.props.handleSubmit}>
+                    <textarea rows="5" cols="59" value={this.state.textValue} onChange={this.props.handleInputChange} name="textValue" placeholder="Type out your answer here." />
+                </form>
             )
             // if user clicks on the list option
         } else if (this.state.content === "list") {
@@ -79,18 +68,20 @@ class Question extends Component {
             return (
                 <div className="question-container">
                     <div className="question">
-                        <input type="text" id="question-title" placeholder="  Type out your question here..."
-                            value={this.state.questionTitle} onChange={this.handleInputChange} name="questionTitle" />
+                        <form onSubmit={this.props.handleSubmit}>
+                            <input type="text" id="question-title" placeholder="  Type out your question here..."
+                                value={this.state.questionTitle} onChange={this.props.handleInputChange} name="questionTitle" />
+                        </form>
                     </div>
                     <hr />
                     {this.renderContent()}
                     <br />
                     <hr></hr>
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
+                    <a href="/questionnaire" data-toggle="tooltip" data-placement="bottom" title="Delete this question :(">
                         <img src={require("./images/delete.png")} height="30px" id="delete-img" alt="delete" name="delete" onClick={this.handleContentChange}></img>
                     </a>
 
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
+                    <a href="/questionnaire" data-toggle="tooltip" data-placement="bottom" title="Return to answer types selection">
                         <img src={require("./images/return.png")} height="30px" id="return-img" alt="return" name="none" onClick={this.handleContentChange}></img>
                     </a>
                     <br />

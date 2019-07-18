@@ -56,3 +56,20 @@ TextArea {
     position: relative;
     left: 11%;
 }
+
+input {
+    border-left:0 solid transparent;
+    background: transparent;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+    cursor: crosshair;
+}
+
+img, a {
+    cursor: crosshair;
+}
+
+#question-title {
+    font-weight: 600;
+}

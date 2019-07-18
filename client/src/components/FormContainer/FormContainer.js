@@ -4,9 +4,10 @@ import Question from "../Question/Question"
 import AddButton from "../AddButton/AddButton"
 
 class FormContainer extends Component {
-    //Setting the component's initial state
+    // Setting the component's initial state
     state = {
         formTitle: "",
+        questionTitle: ""
     };
 
     handleInputChange = event => {
@@ -17,12 +18,20 @@ class FormContainer extends Component {
         // Updating the input's state
         this.setState({
             [name]: value
-        }, () => { console.log(`Textbox: ${this.state.formTitle}`); });
+        }, () => {
+            console.log(`Form Title: ${this.state.formTitle}`);
+            console.log(`Question Title: ${this.state.questionTitle}`);
+            console.log(`Textbox: ${this.state.textValue}`);
+        });
     };
 
+    // this function retrieves all form data on submit
     handleSubmit = event => {
         event.preventDefault();
-        console.log(event)
+        console.log(`Form Title: ${this.state.formTitle}`)
+        console.log(`Question Title: ${this.state.questionTitle}`);
+        console.log(`Textbox: ${this.state.textValue}`);
+
     }
 
     render() {
@@ -37,7 +46,7 @@ class FormContainer extends Component {
                         </form>
                     </div>
                     <div id="question-container">
-                        <Question />
+                        <Question handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange}/>
                     </div>
                     <br />
                     {/* Submit - Set up a method to retrieve input from all questions/answers*/}
