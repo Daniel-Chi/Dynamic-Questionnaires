@@ -43,16 +43,13 @@ class FormContainer extends Component {
                                 value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
                         </form>
                     </div>
-                    <div id="question-container">
-                        <Question handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange}/>
-                    </div>
+                    {this.props.children}
                     <br />
                     {/* Submit - Set up a method to retrieve input from all questions/answers*/}
                     <button type="submit" onClick={this.handleSubmit} id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
                     <br />
                     <br />
                 </div>
-                <AddButton />
             </React.Fragment>
         );
     }

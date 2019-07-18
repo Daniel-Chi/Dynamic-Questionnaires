@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import TextArea from "../TextArea/TextArea"
 import TextRadio from "../TextRadio"
 
 class Question extends Component {
