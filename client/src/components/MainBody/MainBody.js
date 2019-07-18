@@ -38,9 +38,10 @@ class MainBody extends React.Component {
     }
 
     //button click handler to redirect from index to detail page
+    //gives _id as a url param
     handleRedirect = event => {
         event.preventDefault();
-        const url = "/questionnaire/" + event.target.value
+        const url = "/questionnaire/" + event.target.formName + "/" + event.target.value
         this.props.historyPush(url)
     }
 
@@ -55,6 +56,7 @@ class MainBody extends React.Component {
                                 <button
                                     onClick={this.handleRedirect}
                                     value={item._id}
+                                    formName={item.name}
                                 >
                                     {item.name}, ID: {item._id}
                                 </button>
