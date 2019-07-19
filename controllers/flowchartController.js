@@ -8,8 +8,13 @@ module.exports = {
 			db.User
 				.findById(req.params.id)
 				.populate("flowchartIds")
-				.then(data => res.json(data))
-				.catch(err => res.status(422).json(err));
+				.exec((err, data) => {
+					if (err) {
+						res.status(422).json(err)
+					} else {
+						res.send(data)
+					}
+				})
 		} else {
 			res.end();
 		}
@@ -27,8 +32,13 @@ module.exports = {
 						.findByIdAndUpdate(req.params.id, {
 							$push: { flowchartIds: data._id }
 						})
-						.then(() => res.json(data))
-						.catch(err => res.status(422).json(err));
+						.exec((err) => {
+							if (err) {
+								res.status(422).json(err)
+							} else {
+								res.send(data._id)
+							}
+						})
 				})
 				.catch(err => res.status(422).json(err));
 		} else {

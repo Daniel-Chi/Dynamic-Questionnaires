@@ -31,8 +31,13 @@ class MainBody extends React.Component {
     getAllForms = (id) => {
         API.getAllForms(id)
             .then(res => {
-                if (res) {
-                    this.setState({ formList: res });
+                if (res.data && Array.isArray(res.data.flowchartIds)) {
+                    this.setState({ formList: res.data.flowchartIds });
+                } else if (res.data) {
+                    this.setState(prevState => {
+                        prevState.formList.push(res.data.flowchartIds)
+                        return { formList: prevState.formList }
+                    })
                 }
             })
             .catch(err => {
@@ -45,10 +50,18 @@ class MainBody extends React.Component {
         event.preventDefault();
         API.postNewForm(this.state.user_id, { name: this.state.newFormTitle })
             .then(res => {
-                this.setState(prevState => {
-                    return {
-                        formList: prevState.formList.push(res),
-                        newFormTitle: ""
+                this.setState((prevState) => {
+                    if (res.data) {
+                        const newForm = {
+                            name: this.state.newFormTitle,
+                            _id: res.data
+                        }
+                        const arr = prevState.formList
+                        arr.push(newForm)
+                        return {
+                            formList: arr,
+                            newFormTitle: ""
+                        }
                     }
                 })
             })
@@ -68,7 +81,7 @@ class MainBody extends React.Component {
     //gives _id as a url param
     handleRedirect = event => {
         event.preventDefault();
-        const url = "/questionnaire/" + event.target.formName + "/" + event.target.value
+        const url = "/questionnaire/" + event.target.name + "/" + event.target.value
         this.props.historyPush(url)
     }
 
@@ -78,15 +91,15 @@ class MainBody extends React.Component {
             return (
                 <ul>
                     {this.state.formList.map(
-                        item => {
+                        (item) => {
                             return (
                                 <li key={item._id}>
                                     <button
                                         onClick={this.handleRedirect}
                                         value={item._id}
-                                        formName={item.name}
+                                        name={item.name}
                                     >
-                                        {item.name}, ID: {item._id}
+                                        {item.name}
                                     </button>
                                 </li>
                             )

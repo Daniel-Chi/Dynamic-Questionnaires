@@ -18,10 +18,14 @@ class Question extends React.Component {
         API.getAllAnswers(this.props.questionId)
             .then(res => {
                 //force this.state.answers to be an array, even if only one answer is sent
-                if (Array.isArray(res)) {
-                    this.setState({ answers: res });
+                if (Array.isArray(res.data.answerIds)) {
+                    this.setState({ answers: res.data.answerIds });
                 } else {
-                    this.setState({ answers: this.state.answers.push(res) })
+                    this.setState((prevState) => {
+                        const arr = prevState.answers
+                        arr.push(res.data.answerIds)
+                        return {answers: arr}
+                    })
                 }
             })
             .catch(err => console.log(err));
@@ -69,14 +73,19 @@ class Question extends React.Component {
         }
     }
 
-    //modify the handleSubmitNewAnswer function to have access to this.state.content before passing it to Answer
+    //modify the handleSubmitNewAnswer function to have access to this.state.content before passing it to NewAnswerForm
     handleSubmitNewAnswer = event => {
         event.preventDefault()
-        this.props.handleSubmitAnswer(this.state.content, (res) =>{
+        this.props.handleSubmitAnswer(this.state.content, () =>{
             this.setState(prevState => {
+                const arr = prevState.answers
+                arr.push({
+                    name: this.props.answerValueField,
+                    answerType: this.state.content
+                })
                 return {
                     content: "none",
-                    answers: prevState.answers.push(res)
+                    answers: arr
                 }
             });
         });

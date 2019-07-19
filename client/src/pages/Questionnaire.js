@@ -23,8 +23,8 @@ class Questionnaire extends React.Component {
             API.getFirstQuestion(this.props.match.params.id)
                 .then(res => {
                     //set the form's first question in view
-                    if (res) {
-                        this.setState({ question: res })
+                    if (typeof res.data.questionId === "object") {
+                        this.setState({ question: res.data.questionId })
                     } else {
                         //render an input field if there is no first question yet
                         this.setState({ firstQuestion: true })
@@ -55,10 +55,12 @@ class Questionnaire extends React.Component {
     //function to handle going to next question based on answer clicked
     handleNextQuestion = event => {
         event.preventDefault();
-        const { name, answerId } = event.target;
+        const { name } = event.target;
         API.getNextQuestion(name)
             .then(res => {
-                this.setQuestion(res, answerId);
+                if (res.data) {
+                    this.setQuestion(res.data.nextQuestion, name);
+                }
             })
             .catch(err => console.log(err));
     }
@@ -108,7 +110,7 @@ class Questionnaire extends React.Component {
             API.postFirstQuestion(this.state.form_id, { name: this.state.questionTitleField })
                 .then(res => {
                     this.setState({
-                        question: res,
+                        question: res.data.questionId,
                         newQuestion: false,
                         questionTitleField: ""
                     });
@@ -119,7 +121,7 @@ class Questionnaire extends React.Component {
             API.postNextQuestion(this.state.parentAnswer_id, { name: this.state.questionTitleField })
                 .then(res => {
                     this.setState({
-                        question: res,
+                        question: res.data.nextQuestion,
                         questionTitleField: ""
                     });
                 })
@@ -133,7 +135,7 @@ class Questionnaire extends React.Component {
             name: this.state.answerValueField,
             answerType: answerType
         })
-            .then(res => { cb(res) })
+            .then(() => { cb() })
             .catch(err => console.log(err));
     }
 

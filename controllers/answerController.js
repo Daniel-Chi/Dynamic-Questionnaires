@@ -8,8 +8,13 @@ module.exports = {
 			db.Questions
 				.findById(req.params.id)
 				.populate("answerIds")
-				.then(data => res.json(data))
-				.catch(err => res.status(422).json(err));
+				.exec((err, data) => {
+					if (err) {
+						res.status(422).json(err)
+					} else {
+						res.send(data)
+					}
+				})
 		} else {
 			res.end();
 		}
@@ -28,8 +33,13 @@ module.exports = {
 						.findByIdAndUpdate(req.params.id, {
 							$push: { answerIds: data._id }
 						})
-						.then(() => res.json(data))
-						.catch(err => res.status(422).json(err))
+						.exec((err, data) => {
+							if (err) {
+								res.status(422).json(err)
+							} else {
+								res.send(data)
+							}
+						})
 				})
 				.catch(err => res.status(422).json(err))
 		} else {
