@@ -1,70 +1,51 @@
 const db = require("../models");
 
 // Defining methods for the questionController
-console.log(db.Questions);
-console.log(db.Answers);
-console.log("-----------");
-
-console.log(db)
 module.exports = {
-  create: function(req, res) {
-    console.log(req.body); 
-    db.Questions
-      .create({name:req.body.question})
-       //.populate("AnswerIds")
-       .then(dbModel => {
-        db.Questions.updateOne({_id:req.params.id},{$push: {QuestionIds:dbModel._id}})
-       })
-       .catch(err => res.status(422).json(err));
-
-       findOne: function(req, res) {
-    db.Questions
-       .find({name:req.params.questionID})
-       .populate("AnswerIds")
-       .then(dbModel => res.json(dbModel))
-       .catch(err => res.status(422).json(err));  
-};
-
-//   findAll: function(req, res) {
-//      db.Questions
-//         .find()
-//         .populate("AnswerIds")
-//         .then(dbModel => res.json(dbModel))
-//         .catch(err => res.status(422).json(err));
-      
-    
-//   },
-
-     
-   
-//  },
-//   create: function(req, res) {
-//     console.log(req.body);
-//     db.Questions
-//       .create(req.body)
-//       .then(dbModel => res.json(dbModel))
-//       .catch(err => res.status(422).json(err));
-// },
-// answer: function(req, res) {
-//   console.log(req.body);
- 
-//     db.Answers.create(req.body)
-//     .then(function(answer) {
-//       // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
-//       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-//       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-//       return db.Questions.findOneAndUpdate({"name": req.body.name}, { $push: { AnswerIds: answer._id } }, { new: true });
-//     })
-//     .then(function(dbUser) {
-//       // If the User was updated successfully, send it back to the client
-//       res.json(dbUser);
-//     })
-//     .catch(function(err) {
-//       // If an error occurs, send it back to the client
-//       res.json(err);
-//     });
-//} 
-
-//};
-
-//res.send("made it in questionController"+req.params.questionID);
+	//method uses form id to send JSON of the form's first question
+	findFirstQuestion: function (req, res) {
+		db.Flowcharts
+			.findById(req.params.id)
+			.populate("questionId")
+			.then(data => res.json(data))
+			.catch(err => res.status(422).json(err));
+	},
+	//method uses answer id to send JSON of the next question
+	findNextQuestion: function (req, res) {
+		db.Answers
+			.findById(req.params.id)
+			.populate("nextQuestion")
+			.then(data => res.json(data))
+			.catch(err => res.status(422).json(err));
+	},
+	//method uses form id to create a question linked by _id, sends JSON of new question
+	createFirstQuestion: function (req, res) {
+		db.Questions
+			.create({
+				name: req.body.name,
+				parentFlowchartId: req.params.id
+			})
+			.then(data => {
+				db.Flowcharts
+					.findByIdAndUpdate(req.params.id, { questionId: data._id })
+					.then(() => res.json(data))
+					.catch(err => res.status(422).json(err))
+			})
+			.catch(err => res.status(422).json(err));
+	},
+	//method uses answer id to create a question linked by _id, sends JSON of new question
+	createNextQuestion: function (req, res) {
+		db.Questions
+			.create({
+				name: req.body.name,
+				parentAnswerId: req.params.id
+			})
+			.then(data => {
+				db.Answers
+					.findByIdAndUpdate(req.params.id, { nextQuestion: data._id })
+					.then(() => res.json(data))
+					.catch(err => res.status(422).json(err))
+			})
+			.catch(err => res.status(422).json(err));
+	}
+}
