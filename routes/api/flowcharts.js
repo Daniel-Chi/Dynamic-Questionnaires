@@ -3,11 +3,11 @@ const flowchartController = require("../../controllers/flowchartController");
 
 
 router.route("/api/flowcharts/?question=:id")
- .post(flowchartController.createNewAnswers);
- 
+ //.post(flowchartController.createNewAnswers);
+ .post(flowchartController.createNewForm);
  
 router.route("/api/flowcharts/?question=:id")
- .get(flowchartController.findAllAnswers);
+ .get(flowchartController.findAllForms);
 
 
 module.exports = router;

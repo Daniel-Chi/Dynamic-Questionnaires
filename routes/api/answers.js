@@ -4,7 +4,7 @@ const answerController = require("../../controllers/answerController");
 
 
 router.route("/api/answers/?question=:id")
- .post(answerController.createNewAnswers);
+ .post(answerController.createNewAnswer);
  
  
 router.route("/api/answers/?question=:id")
