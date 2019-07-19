@@ -46,7 +46,7 @@ class LoginForm extends React.Component {
                     this.props.historyPush("/index")
                 }
             })
-            .catch(err => console.err(err));
+            .catch(err => console.log(err));
     }
 
     //function for button onClick to switch pages between login and signup

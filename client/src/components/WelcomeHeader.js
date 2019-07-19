@@ -3,7 +3,7 @@ import React from 'react';
 const WelcomeHeader = () => {
     return (
         <div>
-            <div className="jumbotron jumbotron-fluid">
+            <div className="jumbotron jumbotron-fluid header">
                 <div className="container">
                     <h1 className="display-4">
                         Welcome to Dynamic Questionnaire!

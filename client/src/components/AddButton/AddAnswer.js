@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddButton = (props) => {
+const AddAnswer = (props) => {
     return (
         <div>
             <a
@@ -8,17 +8,17 @@ const AddButton = (props) => {
                 data-toggle="tooltip"
                 data-placement="bottom"
                 title="Click here to add a new question :)"
-                onClick={props.addNewQuestion}
+                onClick={props.handleContentChange}
             >
                 <img
                     src={require("./add.png")}
-                    height="80px"
-                    id="add-img"
+                    height="30px"
                     alt="add"
+                    name="select"
                 ></img>
             </a>
         </div>
     );
 };
 
-export default AddButton;
+export default AddAnswer;
