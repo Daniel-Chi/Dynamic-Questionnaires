@@ -6,6 +6,8 @@ import API from "../utils/API";
 
 class Questionnaire extends React.Component {
     state = {
+        form_id: "",
+        parentAnswer_id: "",
         question: {},
         questionTitleField: "",
         answerValueField: "",
@@ -17,10 +19,15 @@ class Questionnaire extends React.Component {
     componentDidMount() {
         //avoid "cannot read property __ of undefined" errors
         if (this.props.match && this.props.match.params) {
-            API.getFirstQuestion(this.props.match.params)
+            this.setState({ form_id: this.props.match.params.id })
+            API.getFirstQuestion(this.props.match.params.id)
                 .then(res => {
+                    //set the form's first question in view
                     if (res) {
                         this.setState({ question: res })
+                    } else {
+                        //render an input field if there is no first question yet
+                        this.setState({ firstQuestion: true })
                     }
                 })
                 .catch(err => {
@@ -30,11 +37,12 @@ class Questionnaire extends React.Component {
     }
 
     // set question in view depending on which answer's btn is clicked
-    setQuestion = question => {
+    setQuestion = (question, parentAnswer_id) => {
         if (question) {
             this.setState({
                 question: question,
-                newQuestion: false
+                newQuestion: false,
+                parentAnswer_id: parentAnswer_id
             });
         } else {
             this.setState({
@@ -44,12 +52,28 @@ class Questionnaire extends React.Component {
         }
     }
 
+    //function to handle going to next question based on answer clicked
+    handleNextQuestion = event => {
+        event.preventDefault();
+        const { name, answerId } = event.target;
+        API.getNextQuestion(name)
+            .then(res => {
+                this.setQuestion(res, answerId);
+            })
+            .catch(err => console.log(err));
+    }
+
     //function to render either existing question or input field for new question
     conditionallyRenderCurrentOrNewQuestion = () => {
         if (this.state.newQuestion) {
             return (
-                <form>
-                    <input></input>
+                <form onSubmit={this.handleSubmitNewQuestion}>
+                    <input
+                        value={this.state.questionTitleField}
+                        name="questionTitleField"
+                        onChange={this.handleInputChange}
+                        placeholder="Enter new question here."
+                    />
                 </form>
             )
         } else {
@@ -58,9 +82,9 @@ class Questionnaire extends React.Component {
                     questionValue={this.state.questionTitleField}
                     answerValueField={this.state.answerValueField}
                     currentQuestion={this.state.question.name}
-                    setQuestion={this.setQuestion}
+                    handleNextQuestion={this.handleNextQuestion}
                     handleInputChange={this.handleInputChange}
-                    handleSubmitNewAnswer={this.handleSubmitNewAnswer}
+                    handleSubmitAnswer={this.handleSubmitAnswer}
                     questionId={this.state.question._id}
                     key={this.state.question._id}
                 />
@@ -76,16 +100,41 @@ class Questionnaire extends React.Component {
         });
     };
 
+    //function to conditionally create first question or a subsequent question
     handleSubmitNewQuestion = event => {
         event.preventDefault();
-        
+        if (this.state.firstQuestion) {
+            //connects new question to form by _id
+            API.postFirstQuestion(this.state.form_id, { name: this.state.questionTitleField })
+                .then(res => {
+                    this.setState({
+                        question: res,
+                        newQuestion: false,
+                        questionTitleField: ""
+                    });
+                })
+                .catch(err => console.log(err))
+        } else {
+            //connects new question to previous answer by _id
+            API.postNextQuestion(this.state.parentAnswer_id, { name: this.state.questionTitleField })
+                .then(res => {
+                    this.setState({
+                        question: res,
+                        questionTitleField: ""
+                    });
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     //function to handle creating a new answer on submission
-    handleSubmitNewAnswer = event => {
-        event.preventDefault();
-        API.postNewAnswer(this.state.question._id, {})
-            .then()
+    handleSubmitAnswer = (answerType, cb) => {
+        API.postNewAnswer(this.state.question._id, {
+            name: this.state.answerValueField,
+            answerType: answerType
+        })
+            .then(res => { cb(res) })
+            .catch(err => console.log(err));
     }
 
     // addQuestion = () => {
@@ -126,7 +175,7 @@ class Questionnaire extends React.Component {
                     historyPush={this.props.history.push}
                     formName={this.props.match.params.formName}
                 >
-                    {this.conditionallyRenderCurrentOrNewQuestion}
+                    {this.conditionallyRenderCurrentOrNewQuestion()}
                 </FormContainer>
                 {/* <AddButton addNewQuestion={this.addNewQuestion} /> */}
             </React.Fragment>

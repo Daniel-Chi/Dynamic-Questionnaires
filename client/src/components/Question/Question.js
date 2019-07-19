@@ -32,10 +32,10 @@ class Question extends React.Component {
         API.getAllAnswers(this.props.questionId)
             .then(res => {
                 if (Array.isArray(res)) {
-                    this.setState({answers: res});
+                    this.setState({ answers: res });
                 } else {
                     const arr = []
-                    this.setState({answers: arr.push(res)})
+                    this.setState({ answers: arr.push(res) })
                 }
             })
             .catch(err => console.log(err))
@@ -49,16 +49,7 @@ class Question extends React.Component {
         });
     }
 
-    //function to handle going to next question based on answer clicked
-    handleNextQuestion = event => {
-        event.preventDefault();
-        API.getNextQuestion(event.target.name)
-            .then(res => {
-                this.props.setQuestion(res)
-            })
-            .catch(err => console.log(err))
-    }
-
+    //returns jsx <ul> of all answers in the state 
     renderAnswerList = () => {
         if (this.state.answers.length > 0) {
             return (
@@ -67,7 +58,7 @@ class Question extends React.Component {
                         return (
                             <Answer
                                 name={item.name}
-                                handleNextQuestion={this.handleNextQuestion}
+                                handleNextQuestion={this.props.handleNextQuestion}
                                 answerId={item._id}
                                 key={item._id}
                             />
@@ -78,12 +69,25 @@ class Question extends React.Component {
         }
     }
 
+    //modify the handleSubmitNewAnswer function to have access to this.state.content before passing it to Answer
+    handleSubmitNewAnswer = event => {
+        event.preventDefault()
+        this.props.handleSubmitAnswer(this.state.content, (res) =>{
+            this.setState(prevState => {
+                return {
+                    content: "none",
+                    answers: prevState.answers.push(res)
+                }
+            });
+        });
+    }
+
     renderContent = () => {
         // if user clicks on textbox option
         if (this.state.content === "input") {
             return (
                 <NewAnswerForm
-                    handleSubmitNewAnswer={this.props.handleSubmitNewAnswer}
+                    handleSubmitNewAnswer={this.handleSubmitNewAnswer}
                     answerValueField={this.props.answerValueField}
                     handleInputChange={this.props.handleInputChange}
                     message="Enter a placeholder here."
@@ -93,7 +97,7 @@ class Question extends React.Component {
         } else if (this.state.content === "option") {
             return (
                 <NewAnswerForm
-                    handleSubmitNewAnswer={this.props.handleSubmitNewAnswer}
+                    handleSubmitNewAnswer={this.handleSubmitNewAnswer}
                     answerValueField={this.props.answerValueField}
                     handleInputChange={this.props.handleInputChange}
                     message="Enter a new answer here."

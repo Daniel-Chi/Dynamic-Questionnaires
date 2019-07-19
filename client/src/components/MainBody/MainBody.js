@@ -46,7 +46,10 @@ class MainBody extends React.Component {
         API.postNewForm(this.state.user_id, { name: this.state.newFormTitle })
             .then(res => {
                 this.setState(prevState => {
-                    return { formList: prevState.formList.push(res) }
+                    return {
+                        formList: prevState.formList.push(res),
+                        newFormTitle: ""
+                    }
                 })
             })
             .catch(err => {
