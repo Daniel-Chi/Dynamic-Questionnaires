@@ -1,12 +1,24 @@
-import React from 'react'
-import TextRadio from "../TextRadio"
+import React from 'react';
+import TextRadio from "../TextRadio";
+import API from "../../utils/API";
 
 class Question extends React.Component {
 
     // Setting the component's initial state
     state = {
-        content: "none"
+        content: "none",
+        answers: []
     };
+
+    // populate all of the question's answers from db on mount
+    componentDidMount() {
+        API.getAllAnswers(this.props.questionId)
+            .then(res => {
+                if (res) {
+                    this.setState({answers: })
+                }
+            })
+    }
 
     handleContentChange = event => {
         event.preventDefault()
@@ -14,6 +26,7 @@ class Question extends React.Component {
             content: event.target.name
         })
     }
+
 
 
     renderContent = () => {
