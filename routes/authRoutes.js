@@ -1,29 +1,27 @@
 module.exports = (app, passport) => {
     //POST routes for login and signup
     app.post("/login", passport.authenticate("local-login", {
-        successRedirect: "/index",
-        failureRedirect: "/",
+        successRedirect: "/auth",
+        failureRedirect: "/authError",
         failureFlash: true
     }));
     app.post("/signup", passport.authenticate("local-signup", {
-        successRedirect: "/index",
-        failureRedirect: "/",
+        successRedirect: "/auth",
+        failureRedirect: "/authError",
         failureFlash: true
     }));
     app.get("/logout", (req, res) => {
         req.session.destroy(err => {
-            if (!err) {
-                res.redirect("/");
-            } else {
+            if (err) {
                 console.log(err);
-                res.end()
             }
+            res.end()
         });
     });
-    app.get("/index", (req, res) => {
-        res.send(req.user)
+    app.get("/auth", (req, res) => {
+        res.send({ _id: req.user })
     })
-    app.get("/", (req, res) => {
-        
+    app.get("/authError", (req, res) => {
+        res.send({ errMessage: req.flash("auth"[0]) })
     })
 };
