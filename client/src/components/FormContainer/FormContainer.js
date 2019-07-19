@@ -30,7 +30,7 @@ class FormContainer extends React.Component {
         });
     };
 
-    // TODO: make Update req to backend to update form title
+    // TODO: make Update routes to backend to update form title
     handleSubmit = event => {
         event.preventDefault();
         console.log(this.state.formTitleField)

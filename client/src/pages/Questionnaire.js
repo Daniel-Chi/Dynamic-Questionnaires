@@ -1,13 +1,16 @@
 import React from "react";
 import FormContainer from "../components/FormContainer/FormContainer";
-import AddButton from "../components/AddButton/AddButton";
+// import AddButton from "../components/AddButton/AddButton";
 import Question from '../components/Question/Question';
 import API from "../utils/API";
 
 class Questionnaire extends React.Component {
     state = {
         question: {},
-        questionTitleField: ""
+        questionTitleField: "",
+        answerValueField: "",
+        newQuestion: true,
+        firstQuestion: false
     }
 
     //populate first question from api on mount
@@ -22,20 +25,68 @@ class Questionnaire extends React.Component {
                 })
                 .catch(err => {
                     console.log(err)
-                })
+                });
         }
     }
 
-    setQuestion = event => {
-
+    // set question in view depending on which answer's btn is clicked
+    setQuestion = question => {
+        if (question) {
+            this.setState({
+                question: question,
+                newQuestion: false
+            });
+        } else {
+            this.setState({
+                question: {},
+                newQuestion: true
+            });
+        }
     }
 
+    //function to render either existing question or input field for new question
+    conditionallyRenderCurrentOrNewQuestion = () => {
+        if (this.state.newQuestion) {
+            return (
+                <form>
+                    <input></input>
+                </form>
+            )
+        } else {
+            return (
+                <Question
+                    questionValue={this.state.questionTitleField}
+                    answerValueField={this.state.answerValueField}
+                    currentQuestion={this.state.question.name}
+                    setQuestion={this.setQuestion}
+                    handleInputChange={this.handleInputChange}
+                    handleSubmitNewAnswer={this.handleSubmitNewAnswer}
+                    questionId={this.state.question._id}
+                    key={this.state.question._id}
+                />
+            )
+        }
+    }
+
+    //function to handle input change for any fields in this component's state
     handleInputChange = event => {
-        const { name, value } = event.target
+        const { name, value } = event.target;
         this.setState({
             [name]: value
-        })
+        });
     };
+
+    handleSubmitNewQuestion = event => {
+        event.preventDefault();
+        
+    }
+
+    //function to handle creating a new answer on submission
+    handleSubmitNewAnswer = event => {
+        event.preventDefault();
+        API.postNewAnswer(this.state.question._id, {})
+            .then()
+    }
 
     // addQuestion = () => {
     //     console.log("This function fired");
@@ -75,15 +126,9 @@ class Questionnaire extends React.Component {
                     historyPush={this.props.history.push}
                     formName={this.props.match.params.formName}
                 >
-                    <Question
-                        value={this.state.questionTitleField}
-                        handleInputChange={this.handleInputChange}
-                        placeholder={this.state.question.name}
-                        questionId={this.state.question._id}
-                        key={this.state.question._id}
-                    />
+                    {this.conditionallyRenderCurrentOrNewQuestion}
                 </FormContainer>
-                <AddButton addNewQuestion={this.addNewQuestion} />
+                {/* <AddButton addNewQuestion={this.addNewQuestion} /> */}
             </React.Fragment>
         )
     }

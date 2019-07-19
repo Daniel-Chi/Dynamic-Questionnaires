@@ -1,6 +1,9 @@
 import React from 'react';
-import TextRadio from "../TextRadio";
+// import TextRadio from "../TextRadio";
+import AddAnswer from "../AddButton/AddAnswer";
+import NewAnswerForm from "../NewAnswer";
 import API from "../../utils/API";
+import Answer from '../Answer';
 
 class Question extends React.Component {
 
@@ -20,9 +23,25 @@ class Question extends React.Component {
                 } else {
                     this.setState({ answers: this.state.answers.push(res) })
                 }
-            });
+            })
+            .catch(err => console.log(err));
     }
 
+    // repopulate all answers when the question changes
+    componentDidUpdate() {
+        API.getAllAnswers(this.props.questionId)
+            .then(res => {
+                if (Array.isArray(res)) {
+                    this.setState({answers: res});
+                } else {
+                    const arr = []
+                    this.setState({answers: arr.push(res)})
+                }
+            })
+            .catch(err => console.log(err))
+    }
+
+    //function to handle content of the answer editing area on click
     handleContentChange = event => {
         event.preventDefault();
         this.setState({
@@ -30,30 +49,58 @@ class Question extends React.Component {
         });
     }
 
+    //function to handle going to next question based on answer clicked
+    handleNextQuestion = event => {
+        event.preventDefault();
+        API.getNextQuestion(event.target.name)
+            .then(res => {
+                this.props.setQuestion(res)
+            })
+            .catch(err => console.log(err))
+    }
 
+    renderAnswerList = () => {
+        if (this.state.answers.length > 0) {
+            return (
+                <ul>
+                    {this.state.answers.map(item => {
+                        return (
+                            <Answer
+                                name={item.name}
+                                handleNextQuestion={this.handleNextQuestion}
+                                answerId={item._id}
+                                key={item._id}
+                            />
+                        )
+                    })}
+                </ul>
+            )
+        }
+    }
 
     renderContent = () => {
         // if user clicks on textbox option
-        if (this.state.content === "text") {
+        if (this.state.content === "input") {
             return (
-                <form onSubmit={this.props.handleSubmit}>
-                    <textarea
-                        rows="5"
-                        cols="59"
-                        value={this.state.textValue}
-                        onChange={this.props.handleInputChange}
-                        name="textValue"
-                        placeholder="Enter a placeholder here."
-                    />
-                </form>
+                <NewAnswerForm
+                    handleSubmitNewAnswer={this.props.handleSubmitNewAnswer}
+                    answerValueField={this.props.answerValueField}
+                    handleInputChange={this.props.handleInputChange}
+                    message="Enter a placeholder here."
+                />
             )
             // if user clicks on the list option
-        } else if (this.state.content === "list") {
+        } else if (this.state.content === "option") {
             return (
-                <TextRadio />
+                <NewAnswerForm
+                    handleSubmitNewAnswer={this.props.handleSubmitNewAnswer}
+                    answerValueField={this.props.answerValueField}
+                    handleInputChange={this.props.handleInputChange}
+                    message="Enter a new answer here."
+                />
             )
             // default display/if user clicks on return button
-        } else if (this.state.content === "none") {
+        } else if (this.state.content === "select") {
             return (
                 <React.Fragment>
                     <div id="answer-wrapper">
@@ -62,16 +109,16 @@ class Question extends React.Component {
                             {/*clickable images to allow user to choose answer type */}
                             <span className="img-wrapper">
                                 <a
-                                    href="/questionnaire"
+                                    href={window.location.pathname}
                                     data-toggle="tooltip"
                                     data-placement="bottom"
-                                    title="List Items"
+                                    title="Multiple Choice Option"
                                     onClick={this.handleContentChange}
                                 >
                                     <img
                                         src={require("./images/itemlist.png")}
                                         height="50px"
-                                        name="list"
+                                        name="option"
                                         className="answer-type"
                                         id="list-img"
                                         alt="list"
@@ -82,7 +129,7 @@ class Question extends React.Component {
 
                             <span className="img-wrapper">
                                 <a
-                                    href="/questionnaire"
+                                    href={window.location.pathname}
                                     data-toggle="tooltip"
                                     data-placement="bottom"
                                     title="Textbox"
@@ -91,7 +138,7 @@ class Question extends React.Component {
                                     <img
                                         src={require("./images/textbox.png")}
                                         height="65px"
-                                        name="text"
+                                        name="input"
                                         className="answer-type"
                                         id="textbox-img"
                                         alt="textbox"
@@ -105,73 +152,77 @@ class Question extends React.Component {
                     <br />
                 </React.Fragment>
             )
+        } else {
+            return (
+                <AddAnswer
+                    handleContentChange={this.handleContentChange}
+                    name="select"
+                />
+            )
         }
     }
 
 
     render() {
-        if (this.state.content === "delete") {
-            return null;
-        }
-        else {
-            return (
-                <div className="question-container">
-                    <div className="question">
-                        <form onSubmit={this.props.handleSubmit}>
-                            <input
-                                type="text"
-                                id="question-title"
-                                placeholder={this.props.placeholder}
-                                value={this.props.value}
-                                onChange={this.props.handleInputChange}
-                                name="questionTitleField" />
-                        </form>
-                    </div>
-                    <hr />
-
-                    {this.renderContent()}
-
-                    <br />
-                    <hr></hr>
-                    {/* delete button */}
-                    <a
-                        href="/questionnaire"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Delete this question :("
-                        onClick={this.handleContentChange}
-                    >
-                        <img
-                            src={require("./images/delete.png")}
-                            height="30px"
-                            id="delete-img"
-                            name="delete"
-                            alt="delete">
-                        </img>
-                    </a>
-                    {/* return button */}
-                    <a
-                        href="/questionnaire"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Return to answer types selection"
-                        onClick={this.handleContentChange}
-                    >
-                        <img
-                            src={require("./images/return.png")}
-                            height="30px"
-                            id="return-img"
-                            alt="return"
-                            name="none"
-                        ></img>
-                    </a>
-                    <br />
-                    <br />
+        return (
+            <div className="question-container">
+                <div className="question">
+                    <form onSubmit={this.props.handleSubmit}>
+                        <input
+                            type="text"
+                            id="question-title"
+                            placeholder={this.props.currentQuestion || "Enter question title here..."}
+                            value={this.props.questionValue}
+                            onChange={this.props.handleInputChange}
+                            name="questionTitleField" />
+                    </form>
                 </div>
-            )
-        }
-    }
+                <hr />
 
+                {this.renderContent()}
+
+                <br />
+                <hr></hr>
+                {/* delete button */}
+                <a
+                    href={window.location.pathname}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Delete this question :("
+                    onClick={this.handleContentChange}
+                >
+                    <img
+                        src={require("./images/delete.png")}
+                        height="30px"
+                        id="delete-img"
+                        name="delete"
+                        alt="delete"
+                    >
+                    </img>
+                </a>
+                {/* return button */}
+                <a
+                    href={window.location.pathname}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Return to answer types selection"
+                    onClick={this.handleContentChange}
+                >
+                    <img
+                        src={require("./images/return.png")}
+                        height="30px"
+                        id="return-img"
+                        alt="return"
+                        name="none"
+                    >
+                    </img>
+                </a>
+                <br />
+                <br />
+            </div>
+        )
+    }
 }
+
 
 export default Question;
