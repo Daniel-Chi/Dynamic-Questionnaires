@@ -1,20 +1,12 @@
 import React from 'react';
+import API from "../../utils/API";
 
 class MainBody extends React.Component {
 
     state = {
         newFormTitle: "",
         user_id: "",
-        formList: [{
-            name: "Eye Care",
-            _id: "1"
-        }, {
-            name: "Dental",
-            _id: "2"
-        }, {
-            name: "Chiropractor",
-            _id: "3"
-        }]
+        formList: []
     }
 
     //before mount, check for authentication
@@ -29,12 +21,23 @@ class MainBody extends React.Component {
                     //redirect to login on failed auth
                     this.props.historyPush("/");
                 }
+            })
+            .catch(err => {
+                console.log(err)
             });
     };
 
-    //TODO populate formList from api on mount
+    //populate formList from api on mount
     componentDidMount() {
-
+        API.getAllForms(this.state.user_id)
+            .then(res => {
+                if (res) {
+                    this.setState({ formList: res })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     //button click handler to redirect from index to detail page
@@ -47,25 +50,27 @@ class MainBody extends React.Component {
 
     //function that returns JSX of a list of all forms
     listAllForms = () => {
-        return (
-            <ul>
-                {this.state.formList.map(
-                    item => {
-                        return (
-                            <li key={item._id}>
-                                <button
-                                    onClick={this.handleRedirect}
-                                    value={item._id}
-                                    formName={item.name}
-                                >
-                                    {item.name}, ID: {item._id}
-                                </button>
-                            </li>
-                        )
-                    }
-                )}
-            </ul>
-        )
+        if (this.state.formList.length > 0) {
+            return (
+                <ul>
+                    {this.state.formList.map(
+                        item => {
+                            return (
+                                <li key={item._id}>
+                                    <button
+                                        onClick={this.handleRedirect}
+                                        value={item._id}
+                                        formName={item.name}
+                                    >
+                                        {item.name}, ID: {item._id}
+                                    </button>
+                                </li>
+                            )
+                        }
+                    )}
+                </ul>
+            )
+        }
     }
 
     render() {
