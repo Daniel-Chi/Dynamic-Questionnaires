@@ -1,13 +1,16 @@
 import React from 'react';
-import WelcomeHeader from '../components/WelcomeHeader';
+import Header from '../components/Header';
 import LoginForm from '../components/LoginForm';
 import Footer from '../components/Footer';
 
-function Login() {
+function Login(props) {
   return (
     <div>
-      <WelcomeHeader />
-      <LoginForm authenticationRoute="/signup" otherAuth="Login" />
+      <Header />
+      <LoginForm 
+      authenticationRoute="/signup" 
+      otherAuth="Login"
+      historyPush={props.history.push} />
       <Footer />
     </div>
   );
