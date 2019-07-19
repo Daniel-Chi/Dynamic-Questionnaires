@@ -7,7 +7,7 @@ import API from "../utils/API";
 class Questionnaire extends React.Component {
     state = {
         question: {},
-        questionTitle: ""
+        questionTitleField: ""
     }
 
     //populate first question from api on mount
@@ -17,13 +17,17 @@ class Questionnaire extends React.Component {
             API.getFirstQuestion(this.props.match.params)
                 .then(res => {
                     if (res) {
-                        this.setState({question: res})
+                        this.setState({ question: res })
                     }
                 })
                 .catch(err => {
                     console.log(err)
                 })
         }
+    }
+
+    setQuestion = event => {
+
     }
 
     handleInputChange = event => {
@@ -63,30 +67,23 @@ class Questionnaire extends React.Component {
     //     });
     // };
 
-    handleContentChange = event => {
-        event.preventDefault()
-        this.setState({
-            content: event.target.name
-        })
-    };
 
     render() {
         return (
             <React.Fragment>
-                <FormContainer historyPush={this.props.history.push}>
-                    {this.state.questions.map(item => {
-                        return (
-                            <Question
-                                handleClick={this.handleContentChange}
-                                renderContent={this.renderContent}
-                                name={item.name}
-                                questionId={item._id}
-                                key={item._id}
-                            />
-                        );
-                    })}
+                <FormContainer
+                    historyPush={this.props.history.push}
+                    formName={this.props.match.params.formName}
+                >
+                    <Question
+                        value={this.state.questionTitleField}
+                        handleInputChange={this.handleInputChange}
+                        placeholder={this.state.question.name}
+                        questionId={this.state.question._id}
+                        key={this.state.question._id}
+                    />
                 </FormContainer>
-                <AddButton onClick={this.addQuestion} />
+                <AddButton addNewQuestion={this.addNewQuestion} />
             </React.Fragment>
         )
     }

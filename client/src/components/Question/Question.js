@@ -14,17 +14,20 @@ class Question extends React.Component {
     componentDidMount() {
         API.getAllAnswers(this.props.questionId)
             .then(res => {
-                if (res) {
-                    // this.setState({answers: })
+                //force this.state.answers to be an array, even if only one answer is sent
+                if (Array.isArray(res)) {
+                    this.setState({ answers: res });
+                } else {
+                    this.setState({ answers: this.state.answers.push(res) })
                 }
-            })
+            });
     }
 
     handleContentChange = event => {
-        event.preventDefault()
+        event.preventDefault();
         this.setState({
             content: event.target.name
-        })
+        });
     }
 
 
@@ -34,7 +37,14 @@ class Question extends React.Component {
         if (this.state.content === "text") {
             return (
                 <form onSubmit={this.props.handleSubmit}>
-                    <textarea rows="5" cols="59" value={this.state.textValue} onChange={this.props.handleInputChange} name="textValue" placeholder="Type out your answer here." />
+                    <textarea
+                        rows="5"
+                        cols="59"
+                        value={this.state.textValue}
+                        onChange={this.props.handleInputChange}
+                        name="textValue"
+                        placeholder="Enter a placeholder here."
+                    />
                 </form>
             )
             // if user clicks on the list option
@@ -108,8 +118,13 @@ class Question extends React.Component {
                 <div className="question-container">
                     <div className="question">
                         <form onSubmit={this.props.handleSubmit}>
-                            <input type="text" id="question-title" placeholder="  Type out your question here..."
-                                value={this.state.questionTitle} onChange={this.props.handleInputChange} name="questionTitle" />
+                            <input
+                                type="text"
+                                id="question-title"
+                                placeholder={this.props.placeholder}
+                                value={this.props.value}
+                                onChange={this.props.handleInputChange}
+                                name="questionTitleField" />
                         </form>
                     </div>
                     <hr />
