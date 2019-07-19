@@ -15,7 +15,7 @@ class Question extends React.Component {
         API.getAllAnswers(this.props.questionId)
             .then(res => {
                 if (res) {
-                    this.setState({answers: })
+                    // this.setState({answers: })
                 }
             })
     }

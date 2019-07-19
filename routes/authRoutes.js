@@ -20,4 +20,7 @@ module.exports = (app, passport) => {
             }
         });
     });
+    app.get("/index", (req, res) => {
+        res.send(req.user)
+    })
 };

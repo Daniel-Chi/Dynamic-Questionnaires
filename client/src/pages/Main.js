@@ -3,7 +3,7 @@ import Mainheader from '../components/MainHeader';
 import MainBody from '../components/MainBody/MainBody';
 import Footer from '../components/Footer';
 
-function MainMenu (props) {
+function Main (props) {
     return(
         <div>
             <Mainheader />
@@ -15,4 +15,4 @@ function MainMenu (props) {
     );
 };
 
-export default MainMenu;
+export default Main;
