@@ -24,7 +24,7 @@ class Question extends React.Component {
                     this.setState((prevState) => {
                         const arr = prevState.answers
                         arr.push(res.data.answerIds)
-                        return {answers: arr}
+                        return { answers: arr }
                     })
                 }
             })
@@ -35,11 +35,14 @@ class Question extends React.Component {
     componentDidUpdate() {
         API.getAllAnswers(this.props.questionId)
             .then(res => {
-                if (Array.isArray(res)) {
-                    this.setState({ answers: res });
+                if (Array.isArray(res.data.answerIds)) {
+                    this.setState({ answers: res.data.answerIds });
                 } else {
-                    const arr = []
-                    this.setState({ answers: arr.push(res) })
+                    this.setState((prevState) => {
+                        const arr = prevState.answers
+                        arr.push(res.data.answerIds)
+                        return { answers: arr }
+                    })
                 }
             })
             .catch(err => console.log(err))
@@ -53,22 +56,50 @@ class Question extends React.Component {
         });
     }
 
+    //before giving function to Answer, add functionality to repopulate answers array
+    handleNextQuestion = event => {
+        console.log("Question.js answer id: " + event.target.name)
+        event.preventDefault();
+        this.props.handleNextQuestion(event.target.name, (res) => {
+            if (!res.data.questionId) {
+                return false
+            } else {
+                API.getAllAnswers(res.data.questionId._id)
+                    .then(res => {
+                        //force answers to be an array, even if there's only one
+                        if (Array.isArray(res.data.answerIds)) {
+                            this.setState({ answers: res.data.answerIds });
+                        } else {
+                            this.setState(() => {
+                                const arr = []
+                                arr.push(res.data.answerIds)
+                                return { answers: arr }
+                            })
+                        }
+                    })
+            }
+        })
+    }
+
     //returns jsx <ul> of all answers in the state 
     renderAnswerList = () => {
         if (this.state.answers.length > 0) {
             return (
-                <ul>
-                    {this.state.answers.map(item => {
-                        return (
-                            <Answer
-                                name={item.name}
-                                handleNextQuestion={this.props.handleNextQuestion}
-                                answerId={item._id}
-                                key={item._id}
-                            />
-                        )
-                    })}
-                </ul>
+                <React.Fragment>
+                    <hr></hr>
+                    <ul>
+                        {this.state.answers.map(item => {
+                            return (
+                                <Answer
+                                    name={item.name}
+                                    handleNextQuestion={this.handleNextQuestion}
+                                    answerId={item._id}
+                                    key={item._id}
+                                />
+                            )
+                        })}
+                    </ul>
+                </React.Fragment>
             )
         }
     }
@@ -76,18 +107,17 @@ class Question extends React.Component {
     //modify the handleSubmitNewAnswer function to have access to this.state.content before passing it to NewAnswerForm
     handleSubmitNewAnswer = event => {
         event.preventDefault()
-        this.props.handleSubmitAnswer(this.state.content, () =>{
-            this.setState(prevState => {
-                const arr = prevState.answers
-                arr.push({
-                    name: this.props.answerValueField,
-                    answerType: this.state.content
-                })
-                return {
-                    content: "none",
-                    answers: arr
+        this.props.handleSubmitAnswer(this.state.content, (res) => {
+            API.getAllAnswers(res.data._id)
+                .then((res) => {
+                    this.setState(() => {
+                        return {
+                            content: "none",
+                            answers: res.data.answerIds
+                        }
+                    });
                 }
-            });
+                )
         });
     }
 
@@ -191,7 +221,7 @@ class Question extends React.Component {
                     </form>
                 </div>
                 <hr />
-
+                {this.renderAnswerList()}
                 {this.renderContent()}
 
                 <br />

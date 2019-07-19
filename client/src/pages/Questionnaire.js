@@ -19,20 +19,21 @@ class Questionnaire extends React.Component {
     componentDidMount() {
         //avoid "cannot read property __ of undefined" errors
         if (this.props.match && this.props.match.params) {
-            this.setState({ form_id: this.props.match.params.id })
-            API.getFirstQuestion(this.props.match.params.id)
-                .then(res => {
-                    //set the form's first question in view
-                    if (typeof res.data.questionId === "object") {
-                        this.setState({ question: res.data.questionId })
-                    } else {
-                        //render an input field if there is no first question yet
-                        this.setState({ firstQuestion: true })
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                });
+            this.setState({ form_id: this.props.match.params.id }, () => {
+                API.getFirstQuestion(this.props.match.params.id)
+                    .then(res => {
+                        //set the form's first question in view
+                        if (res.data.questionId) {
+                            this.setState({ question: res.data.questionId })
+                        } else {
+                            //render an input field if there is no first question yet
+                            this.setState({ firstQuestion: true })
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
         }
     }
 
@@ -41,11 +42,13 @@ class Questionnaire extends React.Component {
         if (question) {
             this.setState({
                 question: question,
+                questionTitleField: "",
                 newQuestion: false,
                 parentAnswer_id: parentAnswer_id
             });
         } else {
             this.setState({
+                questionTitleField: "",
                 question: {},
                 newQuestion: true
             });
@@ -53,45 +56,21 @@ class Questionnaire extends React.Component {
     }
 
     //function to handle going to next question based on answer clicked
-    handleNextQuestion = event => {
-        event.preventDefault();
-        const { name } = event.target;
-        API.getNextQuestion(name)
+    handleNextQuestion = (answerId, cb) => {
+        API.getNextQuestion(answerId)
             .then(res => {
-                if (res.data) {
-                    this.setQuestion(res.data.nextQuestion, name);
+                if (res.data.nextQuestion) {
+                    this.setQuestion(res.data.nextQuestion, res.data._id);
+                } else {
+                    this.setQuestion(null, res.data._id)
+                }
+                if (!cb(res)) {
+                    this.setState({newQuestion: true})
+                } else {
+                    cb(res)
                 }
             })
             .catch(err => console.log(err));
-    }
-
-    //function to render either existing question or input field for new question
-    conditionallyRenderCurrentOrNewQuestion = () => {
-        if (this.state.newQuestion) {
-            return (
-                <form onSubmit={this.handleSubmitNewQuestion}>
-                    <input
-                        value={this.state.questionTitleField}
-                        name="questionTitleField"
-                        onChange={this.handleInputChange}
-                        placeholder="Enter new question here."
-                    />
-                </form>
-            )
-        } else {
-            return (
-                <Question
-                    questionValue={this.state.questionTitleField}
-                    answerValueField={this.state.answerValueField}
-                    currentQuestion={this.state.question.name}
-                    handleNextQuestion={this.handleNextQuestion}
-                    handleInputChange={this.handleInputChange}
-                    handleSubmitAnswer={this.handleSubmitAnswer}
-                    questionId={this.state.question._id}
-                    key={this.state.question._id}
-                />
-            )
-        }
     }
 
     //function to handle input change for any fields in this component's state
@@ -109,23 +88,55 @@ class Questionnaire extends React.Component {
             //connects new question to form by _id
             API.postFirstQuestion(this.state.form_id, { name: this.state.questionTitleField })
                 .then(res => {
-                    this.setState({
-                        question: res.data.questionId,
-                        newQuestion: false,
-                        questionTitleField: ""
-                    });
+                    API.getFirstQuestion(res.data._id)
+                        .then(res => {
+                            this.setState({
+                                question: res.data.questionId,
+                                newQuestion: false,
+                                questionTitleField: ""
+                            });
+                        })
                 })
                 .catch(err => console.log(err))
         } else {
             //connects new question to previous answer by _id
             API.postNextQuestion(this.state.parentAnswer_id, { name: this.state.questionTitleField })
-                .then(res => {
+                .then(() => {
                     this.setState({
-                        question: res.data.nextQuestion,
+                        question: this.state.questionTitleField,
                         questionTitleField: ""
                     });
                 })
                 .catch(err => console.log(err));
+        }
+    }
+
+    //function to render either existing question or input field for new question
+    conditionallyRenderCurrentOrNewQuestion = () => {
+        if (this.state.question._id) {
+            return (
+                <Question
+                    questionValue={this.state.questionTitleField}
+                    answerValueField={this.state.answerValueField}
+                    currentQuestion={this.state.question.name}
+                    handleNextQuestion={this.handleNextQuestion}
+                    handleInputChange={this.handleInputChange}
+                    handleSubmitAnswer={this.handleSubmitAnswer}
+                    questionId={this.state.question._id}
+                    key={this.state.question._id}
+                />
+            )
+        } else {
+            return (
+                <form onSubmit={this.handleSubmitNewQuestion}>
+                    <input
+                        value={this.state.questionTitleField}
+                        name="questionTitleField"
+                        onChange={this.handleInputChange}
+                        placeholder="Enter new question here."
+                    />
+                </form>
+            )
         }
     }
 
@@ -135,7 +146,12 @@ class Questionnaire extends React.Component {
             name: this.state.answerValueField,
             answerType: answerType
         })
-            .then(() => { cb() })
+            .then((res) => { 
+                cb(res);
+                this.setState({
+                    answerValueField: ""
+                })
+            })
             .catch(err => console.log(err));
     }
 
