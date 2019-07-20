@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit} className="col s12">
                     <div className="form-group">
-                        <label className="username" for="inputUserName">
+                        <label className="username" htmlFor="inputUserName">
                             Username:
                         </label>
                         <input
