@@ -1,4 +1,5 @@
 import React from 'react';
+import "./container.css"
 
 class LoginForm extends React.Component {
 
@@ -59,7 +60,7 @@ class LoginForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit} className="col s12">
                     <div className="form-group">
-                        <label htmlFor="inputUserName">
+                        <label className="username" for="inputUserName">
                             Username:
                         </label>
                         <input
@@ -87,6 +88,9 @@ class LoginForm extends React.Component {
                     <button type="submit" className="btn btn-primary">
                         Submit
                     </button>
+                    
+                    
+
                     <div className="button-pos">
                         <button
                             type="button"

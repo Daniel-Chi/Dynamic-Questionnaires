@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import "./formcontainer.css"
-// import API from "../../utils/API"
+import Question from "../Question/Question"
+
+
 
 class FormContainer extends React.Component {
     //Setting the component's initial state
