@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit} className="col s12">
                     <div className="form-group">
-                        <label for="inputUserName">
+                        <label className="username" for="inputUserName">
                             Username:
                         </label>
                         <input
@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
                             required />
                     </div>
                     <div className="form-group">
-                        <label for="inputPassword">
+                        <label className="password" for="inputPassword">
                             Password:
                         </label>
                         <input
@@ -63,8 +63,11 @@ class LoginForm extends React.Component {
                     <button type="submit" className="btn btn-primary">
                         Submit
                     </button>
+                    
+                    
+
                     <div className="button-pos">
-                        <button type="button" className="btn btn-primary">
+                        <button type="button" className="btn button-primary">
                             {this.props.otherAuth}
                         </button>
                     </div>

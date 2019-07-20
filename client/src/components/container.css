@@ -1,5 +1,5 @@
 body {
-    background-color: #000;
+    background-image: linear-gradient(rgb(98, 0, 255), rgb(88, 39, 20));
 }
 
 .fly-in-text {
@@ -35,98 +35,112 @@ body {
 
 
 
-@media (max-width: 767px) {
-    .form-group .label  {
-      flex-direction: column;
-      height: 630px;
-      width: 320px;
-    }
+.username {
+  color: white;
+}
+
+.password {
+  color: white;
+}
+
+
+/* submit up button */
+
+
+.btn-primary {
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid orangeRed;
+	background: transparent;
+	position: relative;
+	padding: 0;
+  
+	color: #fff;
+	/*For IE*/
   }
-  .left {
-    background: white;
-    height: calc(100% - 40px);
-    top: 20px;
-    position: relative;
-    width: 50%;
+  .btn-primary > span {
+	display: inline-block;
+	padding: 8px 16px;
+	background: linear-gradient(45deg, #fff 50%, orangeRed 50%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
   }
-  @media (max-width: 767px) {
-    .left {
-      height: 100%;
-      left: 20px;
-      width: calc(100% - 40px);
-      max-height: 270px;
-    }
+  .btn-primary:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(45deg, orangeRed 50%, transparent 50%);
+	z-index: -1;
   }
-  .login {
-    font-size: 50px;
-    font-weight: 900;
-    margin: 50px 40px 40px;
+  
+  .btn-primary > span,
+  .btn-primary:after {
+	background-size: 300%;
+	background-position: 100%;
+	transition: 1s, font-size 0.2s;
   }
-  .eula {
-    color: #999;
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 40px;
-  }
-  .right {
-    background: #474A59;
-    box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
-    color: #F1F1F2;
-    position: relative;
-    width: 50%;
-  }
-  @media (max-width: 767px) {
-    .right {
-      flex-shrink: 0;
-      height: 100%;
-      width: 100%;
-      max-height: 350px;
-    }
-  }
-  svg {
-    position: absolute;
-    width: 320px;
-  }
-  path {
-    fill: none;
-    stroke: url(#linearGradient);;
-    stroke-width: 4;
-    stroke-dasharray: 240 1386;
-  }
-  .form {
-    margin: 40px;
-    position: absolute;
-  }
-  label {
-    color:  #c2c2c5;
-    display: block;
-    font-size: 14px;
-    height: 16px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-  }
-  input {
-    background: transparent;
-    border: 0;
-    color: #f2f2f2;
-    font-size: 20px;
-    height: 30px;
-    line-height: 30px;
-    outline: none !important;
-    width: 100%;
-  }
-  input::-moz-focus-inner { 
-    border: 0; 
-  }
-  #submit {
-    color: #707075;
-    margin-top: 40px;
-    transition: color 300ms;
-  }
-  #submit:focus {
-    color: #f2f2f2;
-  }
-  #submit:active {
-    color: #d0d0d2;
+  
+  .btn-primary:hover > span,
+  .btn-primary:hover:after {
+	background-position: 0;
+	font-size: 1.1em;
+  
+	color: orangeRed;
+	/*For IE*/
   }
 
+
+/* sign up button */
+.button-primary {
+	margin-top: 50px;
+	
+}
+
+
+.button-primary {
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid orangeRed;
+	background: transparent;
+	position: relative;
+	padding: 0;
+  
+	color: #fff;
+	/*For IE*/
+  }
+  .button-primary > span {
+	display: inline-block;
+	padding: 8px 16px;
+	background: linear-gradient(45deg, #fff 50%, orangeRed 50%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  }
+  .button-primary:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(45deg, orangeRed 50%, transparent 50%);
+	z-index: -1;
+  }
+  
+  .button-primary > span,
+  .button-primary:after {
+	background-size: 300%;
+	background-position: 100%;
+	transition: 1s, font-size 0.2s;
+  }
+  
+  .button-primary:hover > span,
+  .button-primary:hover:after {
+	background-position: 0;
+	font-size: 1.1em;
+  
+	color: orangeRed;
+	/*For IE*/
+  }
