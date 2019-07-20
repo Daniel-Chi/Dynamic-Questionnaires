@@ -6,14 +6,18 @@ const QuestionSchema = new Schema({
         type: String,
         required: true
     },
-    question: {
-        type: String,
-        required: true
+    parentFlowchartId: {
+        type: Schema.Types.ObjectId,
+        ref: "Flowcharts"
     },
-    answerIds: {
+    parentAnswerId: {
         type: Schema.Types.ObjectId,
         ref: "Answers"
-    }
+    },
+    answerIds: [{
+        type: Schema.Types.ObjectId,
+        ref: "Answers"
+    }]
 });
 
 

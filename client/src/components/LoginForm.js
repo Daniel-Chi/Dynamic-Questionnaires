@@ -8,6 +8,18 @@ class LoginForm extends React.Component {
         password: ""
     };
 
+    //before mount, check for authentication
+    //redirect to index if already authenticated
+    componentWillMount() {
+        fetch("/auth")
+            .then(res => res.json())
+            .then(resJSON => {
+                if (resJSON._id) {
+                    this.props.historyPush("/index");
+                }
+            });
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -17,6 +29,7 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        //post route to login/signup handled in express server
         fetch(this.props.authenticationRoute, {
             method: 'POST',
             headers: {
@@ -27,7 +40,19 @@ class LoginForm extends React.Component {
                 username: this.state.username,
                 password: this.state.password
             })
-        })
+        }).then(res => res.json())
+            .then(resJSON => {
+                //on successful login/signup, redirect to index
+                if (resJSON._id) {
+                    this.props.historyPush("/index")
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+    //function for button onClick to switch pages between login and signup
+    redirectOtherAuth = () => {
+        this.props.historyPush(this.props.otherAuth)
     }
 
     render() {
@@ -48,7 +73,7 @@ class LoginForm extends React.Component {
                             required />
                     </div>
                     <div className="form-group">
-                        <label className="password" for="inputPassword">
+                        <label htmlFor="inputPassword">
                             Password:
                         </label>
                         <input
@@ -67,7 +92,11 @@ class LoginForm extends React.Component {
                     
 
                     <div className="button-pos">
-                        <button type="button" className="btn button-primary">
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={this.redirectOtherAuth}
+                        >
                             {this.props.otherAuth}
                         </button>
                     </div>

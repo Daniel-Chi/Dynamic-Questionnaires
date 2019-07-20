@@ -7,7 +7,7 @@ import Main from './pages/Main';
 import NotFound from './pages/NotFound';
 import Questionnaire from './pages/Questionnaire';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
@@ -16,7 +16,7 @@ function App() {
           <Redirect exact from="/login" to="/" />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/index" component={Main} />
-          <Route exact path="/questionnaire" component={Questionnaire}/>
+          <Route path="/questionnaire/:formName/:id" component={Questionnaire}/>
           <Route component={NotFound} />
         </Switch>
       </div>

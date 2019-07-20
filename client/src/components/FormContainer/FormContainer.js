@@ -3,38 +3,74 @@ import "./formcontainer.css"
 import Question from "../Question/Question"
 
 
-class FormContainer extends Component {
+
+class FormContainer extends React.Component {
     //Setting the component's initial state
     state = {
-        formTitle: ""
+        formTitleField: ""
     };
+
+    //before mount, check for authentication
+    //if not authenticated, redirect back to login
+    componentWillMount() {
+        fetch("/auth")
+            .then(res => res.json())
+            .then(resJSON => {
+                if (!resJSON._id) {
+                    this.props.historyPush("/");
+                }
+            })
+            .catch(err => console.log(err));
+    }
 
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
         const value = event.target.value;
         const name = event.target.name;
-
-        // Updating the input's state
         this.setState({
             [name]: value
-        }, () => { console.log(`Textbox: ${this.state.formTitle}`); });
+        });
     };
+
+    // TODO: make Update routes to backend to update form title
+    handleSubmit = event => {
+        event.preventDefault();
+        console.log(this.state.formTitleField)
+    }
 
     render() {
         return (
-            <div id="questionnaire-container">
-                <br />
-                <input type="text" id="form-name" placeholder="     Title of your form goes here..."
-                    value={this.state.formTitle} onChange={this.handleInputChange} name="formTitle" />
-                <Question />
-                <Question />
-                <Question />
-                <br/>
-                {/* Set up a method to retrieve input from all questions/answers */}
-                <button type="submit" id="submit-btn" className="btn btn-dark btn-lg" value="Submit">Submit</button>
-                <br/>
-                <br/>
-            </div>
+            <React.Fragment>
+                <div id="questionnaire-container">
+                    <div id="title-container">
+                        <br />
+                        {/* TODO: conditionally render Form Title as plain text or input field */}
+                        <form onSubmit={this.handleSubmit}>
+                            <input
+                                type="text"
+                                id="form-name"
+                                placeholder={this.props.formName}
+                                value={this.state.formTitleField}
+                                onChange={this.handleInputChange}
+                                name="formTitleField"
+                            />
+                        </form>
+                    </div>
+                    {this.props.children}
+                    <br />
+                    {/* <button
+                        type="submit"
+                        onClick={this.handleSubmit}
+                        id="submit-btn"
+                        className="btn btn-dark btn-lg"
+                        value="Submit"
+                    >
+                        Submit
+                    </button> */}
+                    <br />
+                    <br />
+                </div>
+            </React.Fragment>
         );
     }
 }

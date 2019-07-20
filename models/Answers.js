@@ -2,14 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AnswerSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
     answerType: {
         type: String,
         required: true
     },
-    placeholder: {
-        type: String
+    parentQuestionId: {
+        type: Schema.Types.ObjectId,
+        ref: "Questions"
     },
-    nextQuestionId: {
+    nextQuestion: {
         type: Schema.Types.ObjectId,
         ref: "Questions"
     }
