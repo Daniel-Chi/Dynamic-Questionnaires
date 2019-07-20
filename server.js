@@ -27,9 +27,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-}
+// }
 //Add auth route, passing in app and passport
 authRouter(app, passport);
 
