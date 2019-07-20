@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import "./question.css"
-import TextArea from "../TextArea/TextArea"
-import List from "../List/List"
-import { throws } from 'assert';
-import React from 'react';
+// import TextArea from "../TextArea/TextArea"
+// import List from "../List/List"
+// import { throws } from 'assert';
 // import TextRadio from "../TextRadio";
 import AddAnswer from "../AddButton/AddAnswer";
 import NewAnswerForm from "../NewAnswer";
